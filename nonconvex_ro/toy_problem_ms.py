@@ -105,7 +105,6 @@ def plot_problem(x_list, LBD_list, UBD_list, e_g_list):
             axs[j, i].set_xticks([], [])
             axs[j, i].set_yticks([], [])
 
-    Z_feas = np.zeros((n, n))
     for k in range(len(x_list)):
         for p in LBD_list[: k + 1]:
             Z_con_line = np.zeros_like(Z)
@@ -132,8 +131,6 @@ def plot_problem(x_list, LBD_list, UBD_list, e_g_list):
                 cmap=colors.ListedColormap(["black"]),
                 linestyles="dashed",
             )
-            if k == len(x_list) - 1:
-                Z_feas += Z_con_line
 
         x_opt = x_list[k]
         axs[0, k].scatter(x_opt[0], x_opt[1], c="red", edgecolors="black", s=50)
@@ -167,12 +164,29 @@ def plot_problem(x_list, LBD_list, UBD_list, e_g_list):
                     cmap=colors.ListedColormap(["red"]),
                     linestyles="dashed",
                 )
+
+        p_robust_feas = np.linspace(0, 2, 50)
+    Z_feas = np.zeros((n, n))
+    print("plotting robust feasible region...")
+    for p in p_robust_feas:
+        Z_con = np.zeros((n, n))
+        for i in range(n):
+            for j in range(n):
+                x_eval = [X1[i, j], X2[i, j]]
+                Z_con[i, j] = con(x_eval, [p])
+                if Z_con[i, j] <= 0:
+                    Z_con[i, j] = 0
+                else:
+                    Z_con[i, j] = 1
+        Z_feas += Z_con
+
     for i in range(n):
         for j in range(n):
             if Z_feas[i, j] <= 0:
                 Z_feas[i, j] = 0
             else:
                 Z_feas[i, j] = 1
+
     for k in range(len(x_list)):
         axs[0, k].contour(
             X1,

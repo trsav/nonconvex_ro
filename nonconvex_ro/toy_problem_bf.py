@@ -9,6 +9,7 @@ from pyomo.environ import (
     minimize,
     maximize,
 )
+from tqdm import tqdm
 from pyomo.opt import SolverFactory
 import matplotlib.pyplot as plt
 import numpy as np
@@ -80,7 +81,6 @@ def plot_upper(x_list, p_list):
         axs[i].set_xticks([], [])
         axs[i].set_yticks([], [])
 
-    Z_feas = np.zeros((n, n))
     for k in range(len(x_list)):
         for p in p_list[: k + 1]:
             Z_con_line = np.zeros_like(Z)
@@ -107,14 +107,26 @@ def plot_upper(x_list, p_list):
                 linestyles="dashed",
             )
 
-            if k == len(x_list) - 1:
-                Z_feas += Z_con_line
-
         x_opt = x_list[k]
         axs[k].scatter(x_opt[0], x_opt[1], c="red", edgecolors="black", s=50)
         if k != 0:
             x_prev = x_list[k - 1]
             axs[k].scatter(x_prev[0], x_prev[1], c="blue", edgecolors="black", s=50)
+
+    p_robust_feas = np.linspace(0, 2, 50)
+    Z_feas = np.zeros((n, n))
+    print("plotting robust feasible region...")
+    for p in tqdm(p_robust_feas):
+        Z_con = np.zeros((n, n))
+        for i in range(n):
+            for j in range(n):
+                x_eval = [X1[i, j], X2[i, j]]
+                Z_con[i, j] = con(x_eval, [p])
+                if Z_con[i, j] <= 0:
+                    Z_con[i, j] = 0
+                else:
+                    Z_con[i, j] = 1
+        Z_feas += Z_con
 
     for i in range(n):
         for j in range(n):
@@ -122,6 +134,7 @@ def plot_upper(x_list, p_list):
                 Z_feas[i, j] = 0
             else:
                 Z_feas[i, j] = 1
+
     for k in range(len(x_list)):
         axs[k].contour(
             X1,
