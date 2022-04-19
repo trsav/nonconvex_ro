@@ -111,7 +111,7 @@ for n_int in n_list:
 def plot_upper(x_list, n_list):
     fig, axs = plt.subplots(1, len(x_list), figsize=(16, 3))
     plt.subplots_adjust(left=0.025, right=0.975)
-    n = 500
+    n = 50
     levels = 20
     x1 = np.linspace(x["x1"][0], x["x1"][1], n)
     x2 = np.linspace(x["x2"][0], x["x2"][1], n)
