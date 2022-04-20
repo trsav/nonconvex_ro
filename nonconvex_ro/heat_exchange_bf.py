@@ -50,7 +50,7 @@ def HE_model(x, p):
     Dh = (4 * h * s) / (2 * (h + s))
     S1 = (W * h * s) / (w + s) * (H / (2 * b))
     S2 = (L * h * s) / (w + s) * (H / (2 * b))
-    A = (2 * W * (h + s) * L) / (w + s) * (H / (2 * b))
+    A = ((2 * W * (h + s) * L) / (w + s)) * (H / (2 * b))
     Af = ((2 * W * h * L) / (w + s)) * (H / (2 * b))
     Ap = (2 * L * W * H) / (2 * b)
     sigma_1 = S1 / (W * H)
@@ -115,7 +115,7 @@ def uncertain_bounds(m, i):
 
 con_list = [con1, con2, con3]
 
-epsilon = 1e-4
+epsilon = 1e-6
 
 m_upper = ConcreteModel()
 m_upper.x = Set(initialize=x.keys())
@@ -234,12 +234,12 @@ def plot_fins(x):
         ax.set_ylim(-2 * a, 2 * 0.014 - 4 * a)
         if j == 0:
             ls = "None"
-            fc = "k"
+            fc = "grey"
             al = 1
             lab = "nominal"
         else:
             ls = "None"
-            fc = "r"
+            fc = "k"
             al = 1
             lab = "robust"
 
@@ -322,7 +322,8 @@ def plot_fins(x):
             i += 2 * s
         ax.set_xlabel("mm")
         ax.set_ylabel("mm")
-
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labels[::-1])
     ax = fig.add_subplot(1, 2, 2, projection="3d")
     ax.set_xlabel("W (m)")
     ax.set_ylabel("L (m)")
@@ -334,12 +335,12 @@ def plot_fins(x):
         if j == 0:
             et = "dotted"
             al = 1
-            c = "k"
+            c = "grey"
             lab = "nominal"
         else:
             et = "solid"
             al = 1
-            c = "r"
+            c = "k"
             lab = "robust"
         ax.plot_wireframe(
             X,
@@ -358,7 +359,8 @@ def plot_fins(x):
     ax.set_ylim(0, x_og["L"][1] - x_og["L"][0])
     ax.set_zlim(0, x_og["H"][1] - x_og["H"][0])
     ax.view_init(30, 225)
-
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labels[::-1])
     plt.savefig("output_images/heat_exchange.pdf")
     return
 
