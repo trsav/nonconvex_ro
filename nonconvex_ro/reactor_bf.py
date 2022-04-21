@@ -12,41 +12,37 @@ from pyomo.environ import (
 )
 from pyomo.opt import SolverFactory
 
+n = 5
 
 p = {}
 p["A"] = {"val": 1.4, "unc": 0.3}
 p["R"] = {"val": 8.314, "unc": 0}
 p["E"] = {"val": 3200, "unc": 200}
-p["T1"] = {"val": 400, "unc": 10}
-p["T2"] = {"val": 400, "unc": 20}
-p["T3"] = {"val": 400, "unc": 30}
-p["v"] = {"val": 2, "unc": 0.3}
+p["v"] = {"val": 2, "unc": 0.2}
+for i in range(n):
+    p["T" + str(i + 1)] = {"val": 400, "unc": 10 + 10 * i}
 
-x = {"V1": [1, 10], "V2": [1, 10], "V3": [1, 10]}
+x = {}
+for i in range(n):
+    x["V" + str(i + 1)] = [1, 100]
 
 
 def obj(x):
-    V1, V2, V3 = x
-    return V1 + V2 + V3
+    V = x
+    return sum(V)
 
 
 def con1(x, p):
-    V1, V2, V3 = x
-    A, R, E, T1, T2, T3, v = p
-    tau1 = V1 / v
-    tau2 = V2 / v
-    tau3 = V3 / v
-    k1 = A * exp(-E / (R * T1))
-    k2 = A * exp(-E / (R * T2))
-    k3 = A * exp(-E / (R * T3))
-    Da1 = tau1 * k1
-    Da2 = tau2 * k2
-    Da3 = tau3 * k3
-    X1 = 0
-    X2 = (X1 + Da1) / (1 + Da1)
-    X3 = (X2 + Da2) / (1 + Da2)
-    X4 = (X3 + Da3) / (1 + Da3)
-    return 0.9 - X4
+    V = x
+    A, R, E, v = p[:4]
+    T = p[4:]
+    X = 0
+    for i in range(len(V)):
+        tau = V[i] / v
+        k = A * exp(-E / (R * T[i]))
+        Da = tau * k
+        X = (X + Da) / (1 + Da)
+    return 0.9 - X
 
 
 con_list = [con1]
