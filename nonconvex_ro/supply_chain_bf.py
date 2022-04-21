@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from pyomo.environ import (
     ConcreteModel,
     Var,
@@ -12,7 +13,9 @@ from pyomo.environ import (
 from pyomo.opt import SolverFactory
 import numpy as np
 
-I = 5
+np.random.seed(100)
+
+I = 12
 J = 4
 K = 3
 
@@ -94,6 +97,46 @@ def con_obj(x, p):
 
 
 con_list = [con_obj]
+
+# balance constraint
+def make_c(j):
+    def c(x, p):
+        grow_w, proc_w, grow_T, proc_T, grow_max, proc_max, dem_min = unpack_params(p)
+        grow_S, proc_S, t = unpack_vars(x)
+        c = 0
+        for i in range(I):
+            c += grow_S[i, j]
+        d = 0
+        for k in range(K):
+            d += proc_S[j, k]
+        return c - d
+
+    return c
+
+
+for j in range(J):
+    c = make_c(j)
+    con_list += [c]
+
+
+def make_c(j):
+    def c(x, p):
+        grow_w, proc_w, grow_T, proc_T, grow_max, proc_max, dem_min = unpack_params(p)
+        grow_S, proc_S, t = unpack_vars(x)
+        c = 0
+        for i in range(I):
+            c += grow_S[i, j]
+        d = 0
+        for k in range(K):
+            d += proc_S[j, k]
+        return d - c
+
+    return c
+
+
+for j in range(J):
+    c = make_c(j)
+    con_list += [c]
 
 
 def make_c(i):
@@ -178,6 +221,59 @@ print("\nNominal solution: ", x_opt, "\n")
 p_list = [p_nominal]
 x_list = [x_opt]
 
+
+def plot_solution(x_list, p_list):
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+    names = ["Nominal", "Robust"]
+    for a in range(2):
+        x = x_list[a]
+        axs[a].set_title(names[a])
+        p = p_list[a]
+        grow_w, proc_w, grow_T, proc_T, grow_max, proc_max, dem_min = unpack_params(p)
+        grow_S, proc_S, t = unpack_vars(x)
+        axs[a].grid(alpha=0.5)
+        axs[a].scatter(
+            loc_I[:, 0], loc_I[:, 1], c="k", marker="x", label="Production", s=100
+        )
+        axs[a].scatter(
+            loc_J[:, 0], loc_J[:, 1], c="k", marker="o", label="Processing", s=100
+        )
+        axs[a].scatter(
+            loc_K[:, 0], loc_K[:, 1], c="k", marker="^", label="Demand", s=100
+        )
+        e = 0.75
+        for i in range(I):
+            for j in range(J):
+                if grow_S[i, j] > 0.001:
+                    axs[a].arrow(
+                        loc_I[i, 0],
+                        loc_I[i, 1],
+                        (loc_J[j, 0] - loc_I[i, 0]) * e,
+                        (loc_J[j, 1] - loc_I[i, 1]) * e,
+                        width=grow_S[i, j] * 0.01,
+                        color="k",
+                        alpha=0.5,
+                    )
+        e = 0.9
+        for j in range(J):
+            for k in range(K):
+                if proc_S[j, k] > 0.001:
+                    axs[a].arrow(
+                        loc_J[j, 0],
+                        loc_J[j, 1],
+                        (loc_K[k, 0] - loc_J[j, 0]) * e,
+                        (loc_K[k, 1] - loc_J[j, 1]) * e,
+                        width=proc_S[j, k] * 0.01,
+                        color="k",
+                        alpha=0.5,
+                    )
+        axs[a].set_xticks(np.linspace(0, 1, 10), ["" for i in range(10)])
+        axs[a].set_yticks(np.linspace(0, 1, 10), ["" for i in range(10)])
+    axs[0].legend()
+    plt.savefig("output_images/supply_chain.pdf")
+    return
+
+
 robust = True
 while True:
     robust = True
@@ -189,15 +285,17 @@ while True:
         m_lower.p_v = Var(m_lower.p, domain=Reals, bounds=uncertain_bounds)
         param_vars = [m_lower.p_v[str(i)] for i in p.keys()]
         m_lower.obj = Objective(expr=con(x_opt, param_vars), sense=maximize)
-        SolverFactory("ipopt").solve(m_lower)
+        try:
+            SolverFactory("ipopt").solve(m_lower)
+            p_opt = value(m_lower.p_v[:])
+            p_list.append(p_opt)
+            print("Constraint violation: ", value(m_lower.obj))
+            if value(m_lower.obj) > epsilon:
+                robust = False
+                m_upper.cons.add(expr=con(x_vars, p_opt) <= 0)
+        except ValueError:
+            continue
 
-        p_opt = value(m_lower.p_v[:])
-        p_list.append(p_opt)
-        print("Constraint violation: ", value(m_lower.obj))
-        if value(m_lower.obj) > epsilon:
-            robust = False
-            m_upper.cons.add(expr=con(x_vars, p_opt) <= 0)
-    # plot_upper(x_opt,p_list)
     if robust is True:
 
         print("\nRobust solution: ", x_opt)
@@ -207,3 +305,6 @@ while True:
 
     x_opt = value(m_upper.x_v[:])
     x_list.append(x_opt)
+
+
+plot_solution([x_list[0], x_list[-1]], [p_nominal, p_nominal])
