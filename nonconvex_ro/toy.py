@@ -6,6 +6,7 @@ def create_toy_problem():
     def con(x, p_v):
         x1, x2 = x
         p = p_v[0]
+
         return 2 * x1 ** 2 * p ** 2 - p ** 4 + x1 ** 2 - x2 - 0.5 * x1
 
     def obj(x):

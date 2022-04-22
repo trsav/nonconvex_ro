@@ -4,6 +4,7 @@ from supply_chain import create_supply_chain_problem
 from toy import create_toy_problem
 from run_bf import run_bf_case
 from run_ms import run_ms_case
+from run_it import run_it_case
 from tqdm import tqdm
 
 
@@ -37,10 +38,15 @@ problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["toy"] = problem
 
 
-methods = {"Blankenship-Faulk": run_bf_case, "Restriction of RHS": run_ms_case}
-methods = {"Restriction of RHS": run_ms_case}
-e = 1e-4
+res = run_it_case(cases["reactor_2"], "ipopt", 1e-5, 4)
 
+print(res)
+methods = {
+    "Blankenship-Faulk": run_bf_case,
+    "Restriction of RHS": run_ms_case,
+    "Interval extension restriction": run_it_case,
+}
+e = 1e-4
 res_overall = {}
 for key, value in methods.items():
     res_cases = {}
