@@ -1,3 +1,4 @@
+import pprint
 from reactor import create_reactor_problem
 from heat_exchange import create_heat_exchange_problem
 from supply_chain import create_supply_chain_problem
@@ -6,6 +7,7 @@ from run_bf import run_bf_case
 from run_ms import run_ms_case
 from run_it import run_it_case
 from run_it_rs import run_it_rs_case
+from run_it_slsqp import run_it_slsqp_case
 from tqdm import tqdm
 
 cases = {}
@@ -38,6 +40,9 @@ problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["toy"] = problem
 
 
+# res = run_it_slsqp_case(cases['toy'],1000,500,1e-6)
+# print(res)
+
 methods = {
     "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All"},
     "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single"},
@@ -49,15 +54,30 @@ methods = {
         "n": 1,
         "p": 1000,
     },
+    "Nonsmooth 1 interval extensions, SLSQP": {
+        "fun": run_it_slsqp_case,
+        "n": 1,
+        "p": 1000,
+    },
     "MINLP 10 interval extensions": {"fun": run_it_case, "n": 10},
     "Nonsmooth 10 interval extensions, random search": {
         "fun": run_it_rs_case,
         "n": 10,
         "p": 1000,
     },
+    "Nonsmooth 10 interval extensions, SLSQP": {
+        "fun": run_it_slsqp_case,
+        "n": 10,
+        "p": 1000,
+    },
     "MINLP 100 interval extensions": {"fun": run_it_case, "n": 100},
     "Nonsmooth 100 interval extensions, random search": {
         "fun": run_it_rs_case,
+        "n": 100,
+        "p": 1000,
+    },
+    "Nonsmooth 100 interval extensions, SLSQP": {
+        "fun": run_it_slsqp_case,
         "n": 100,
         "p": 1000,
     },
@@ -72,9 +92,15 @@ for key, value in tqdm(methods.items()):
             n = value["n"]
             res = m(cases[k], "bonmin", e, n)
         elif key.split(" ")[0] == "Nonsmooth":
-            n = value["n"]
-            p = value["p"]
-            res = m(cases[k], n, p)
+            if key.split(" ")[-1] == "search":
+                n = value["n"]
+                p = value["p"]
+                res = m(cases[k], n, p)
+            else:
+                n = value["n"]
+                p = value["p"]
+                res = m(cases[k], n, p, e)
+
         elif key.split(" ")[0] == "Blankenship-Faulk":
             cut = value["cut"]
             res = m(cases[k], "ipopt", e, cut)
@@ -83,4 +109,4 @@ for key, value in tqdm(methods.items()):
         res_cases[k] = res
     res_overall[key] = res_cases
 
-print(res_overall)
+pprint.pprint(res_overall)

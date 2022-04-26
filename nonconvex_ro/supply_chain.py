@@ -1,7 +1,5 @@
 import numpy as np
 
-np.random.seed(100)
-
 
 def create_supply_chain_problem(I, J, K):
 

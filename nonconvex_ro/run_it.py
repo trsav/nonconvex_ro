@@ -55,5 +55,6 @@ def run_it_case(problem, solver, e, n_int):
     wct = e - s
     res["wallclock_time"] = wct
     res["solution"] = value(m_upper.x_v[:])
+    res["objective"] = value(m_upper.obj)
 
     return res

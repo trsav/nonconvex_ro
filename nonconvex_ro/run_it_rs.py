@@ -45,7 +45,7 @@ def random_search(obj, con_list, p, bounds, n_int, it):
             f_min = f
             best_index = i
 
-    return sample[best_index]
+    return sample[best_index], f_min
 
 
 def run_it_rs_case(problem, n_int, it):
@@ -55,11 +55,12 @@ def run_it_rs_case(problem, n_int, it):
     con_list = problem["cons"]
     obj = problem["obj"]
     bounds = np.array([[i[0], i[1]] for i in x.values()])
-    sol = random_search(obj, con_list, p, bounds, n_int, it)
+    sol, val = random_search(obj, con_list, p, bounds, n_int, it)
     e = time.time()
     wct = e - s
     res = {}
     res["wallclock_time"] = wct
     res["solution"] = sol
+    res["objective"] = val
 
     return res
