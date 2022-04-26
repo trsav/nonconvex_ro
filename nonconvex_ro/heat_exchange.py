@@ -85,32 +85,46 @@ def create_heat_exchange_problem():
         A = ((2 * W * (h + s) * L) / (w + s)) * (H / (2 * b))
         Af = ((2 * W * h * L) / (w + s)) * (H / (2 * b))
         Ap = (2 * L * W * H) / (2 * b)
-        v1 = M_1 / (rho_1 * S1)
-        v2 = M_2 / (rho_2 * S2)
-        Re_1 = (v1 * Dh * rho_1) / eta
-        Re_2 = (v2 * Dh * rho_2) / eta
-        j_1 = 0.04 * Re_1 ** (-0.28)
-        j_2 = 0.04 * Re_2 ** (-0.28)
+        v1 = M_1 * (1 / (rho_1 * S1))
+        v2 = M_2 * (1 / (rho_2 * S2))
+        Re_1 = (v1 * Dh * rho_1) * (1 / eta)
+        Re_2 = (v2 * Dh * rho_2) * (1 / eta)
+        j_1 = 0.04 * (1 / (Re_1 ** 0.28))
+        j_2 = 0.04 * (1 / (Re_2 ** 0.28))
         Nu_1 = j_1 * Re_1 * (Pr ** (1 / 3))
         Nu_2 = j_2 * Re_2 * Pr ** (1 / 3)
-        alpha_1 = (Nu_1 * con) / Dh
-        alpha_2 = (Nu_2 * con) / Dh
-        f_eff_1 = (((2 * alpha_1) / (con_ss * w)) ** 0.5) * (h / 2)
-        f_eff_2 = (((2 * alpha_2) / (con_ss * w)) ** 0.5) * (h / 2)
-        tan_1_approx = f_eff_1 / (
-            1 + ((f_eff_1 ** 2) / (3 + ((f_eff_1 ** 2) / (5 + f_eff_1 ** 2))))
+        alpha_1 = (Nu_1 * con) * (1 / Dh)
+        alpha_2 = (Nu_2 * con) * (1 / Dh)
+        f_eff_1 = (((2 * alpha_1) * (1 / (con_ss * w))) ** 0.5) * (h * (1 / 2))
+        f_eff_2 = (((2 * alpha_2) * (1 / (con_ss * w))) ** 0.5) * (h * (1 / 2))
+        tan_1_approx = f_eff_1 * (
+            1
+            / (
+                1
+                + (
+                    (f_eff_1 ** 2)
+                    * (1 / (3 + ((f_eff_1 ** 2) * (1 / (5 + f_eff_1 ** 2)))))
+                )
+            )
         )
-        tan_2_approx = f_eff_2 / (
-            1 + ((f_eff_2 ** 2) / (3 + ((f_eff_2 ** 2) / (5 + f_eff_2 ** 2))))
+        tan_2_approx = f_eff_2 * (
+            1
+            / (
+                1
+                + (
+                    (f_eff_2 ** 2)
+                    * (1 / (3 + ((f_eff_2 ** 2) * (1 / (5 + f_eff_2 ** 2)))))
+                )
+            )
         )
-        n_eq_1 = tan_1_approx / f_eff_1
-        n_eq_2 = tan_2_approx / f_eff_2
+        n_eq_1 = tan_1_approx * (1 / f_eff_1)
+        n_eq_2 = tan_2_approx * (1 / f_eff_2)
         A_1_eff = A - Af * (1 - n_eq_1)
         A_2_eff = A - Af * (1 - n_eq_2)
-        alpha_p1 = (alpha_1 * A_1_eff) / Ap
-        alpha_p2 = (alpha_2 * A_2_eff) / Ap
-        U_p = 1 / ((1 / alpha_p1) + (a / con_ss) + (1 / alpha_p2))
-        T_2_out = T_2_in - Q / (U_p * Ap)
+        alpha_p1 = (alpha_1 * A_1_eff) * (1 / Ap)
+        alpha_p2 = (alpha_2 * A_2_eff) * (1 / Ap)
+        U_p = 1 / ((1 / alpha_p1) + (a * (1 / con_ss)) + (1 / alpha_p2))
+        T_2_out = T_2_in - Q * (1 / (U_p * Ap))
         return T_2_out - 400
 
     def con2(x, p):

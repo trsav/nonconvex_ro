@@ -9,11 +9,12 @@ from pyomo.environ import (
     minimize,
     maximize,
 )
+import numpy as np
 from pyomo.opt import SolverFactory
 import time
 
 
-def run_bf_case(problem, solver, e):
+def run_bf_case(problem, solver, e, cut):
     x = problem["x"]
     p = problem["p"]
     con_list = problem["cons"]
@@ -54,6 +55,9 @@ def run_bf_case(problem, solver, e):
     while True:
         sip_lower_bound.append(value(m_upper.obj))
         robust = True
+
+        v_list = []
+        p_list = []
         for con in con_list:
             m_lower = ConcreteModel()
             m_lower.p = Set(initialize=p.keys())
@@ -66,16 +70,38 @@ def run_bf_case(problem, solver, e):
                 p_opt = value(m_lower.p_v[:])
                 p_list.append(p_opt)
                 # print("Constraint violation: ", value(m_lower.obj))
+                v_list.append(value(m_lower.obj))
                 for k in range(len(p_opt)):
                     if p_opt[k] is None:
                         p_opt[k] = p_nominal[k]
-                if value(m_lower.obj) > epsilon:
-                    robust = False
-                    m_upper.cons.add(expr=con(x_vars, p_opt) <= 0)
-                    cut_count += 1
+
+                # Adding all violations to upper problem
+                if cut == "All":
+                    if value(m_lower.obj) > epsilon:
+                        robust = False
+                        m_upper.cons.add(expr=con(x_vars, p_opt) <= 0)
+                        cut_count += 1
 
             except ValueError:
                 continue
+
+        # Only adding worst violation to upper problem
+        if cut == "Single":
+            w = np.argmax(np.array(v_list))
+            if v_list[w] > epsilon:
+                robust = False
+                m_upper.cons.add(expr=con_list[w](x_vars, p_list[w]) <= 0)
+                cut_count += 1
+
+        if cut == "Five":
+            w_list = np.argsort(np.array(v_list))
+            n = max(len(w_list), 5)
+            for w in w_list[:-n]:
+                if v_list[w] > epsilon:
+                    robust = False
+                    m_upper.cons.add(expr=con_list[w](x_vars, p_list[w]) <= 0)
+                    cut_count += 1
+
         if robust is True:
             # print("\nRobust solution: ", x_opt)
             break
@@ -95,5 +121,6 @@ def run_bf_case(problem, solver, e):
     res["average_constraints_in_any_problem"] = cons_count / problem_count
     res["constraints_added"] = cut_count
     res["SIP_lower_bound"] = sip_lower_bound[1:]
+    res["solution"] = x_opt
 
     return res

@@ -8,54 +8,13 @@ from pyomo.environ import (
     Objective,
     minimize,
 )
+import time
 from pyomo.opt import SolverFactory
-import numpy as np
-from interval_definitions import Interval
-
-
-def subdivide(x, N):
-    A = np.zeros(N + 1, dtype="object")
-    A[0] = x.l
-    w_x = x.u - x.l
-    for j in range(1, N + 1):
-        A[j] = A[j - 1] + (w_x / N)
-    return A
-
-
-def subdivide_vector(int_list, N):
-    l = len(int_list)
-    d = [subdivide(int_list[i], N) for i in range(l)]
-    G = np.meshgrid(*d)
-    I = len(G[0][:, 0, 0]) - 1
-    J = len(G[0][0, :, 0]) - 1
-    K = len(G[0][0, 0, :]) - 1
-    for i in range(I):
-        for j in range(J):
-            for k in range(K):
-                if i == 0 and j == 0 and k == 0:
-                    res = np.array(
-                        [
-                            [
-                                Interval(G[m][i, j, k], G[m][i + 1, j + 1, k + 1])
-                                for m in range(len(G[:]))
-                            ]
-                        ]
-                    )
-                else:
-                    res = np.append(
-                        res,
-                        [
-                            [
-                                Interval(G[m][i, j, k], G[m][i + 1, j + 1, k + 1])
-                                for m in range(len(G[:]))
-                            ]
-                        ],
-                        axis=0,
-                    )
-    return res
+from interval_definitions import Interval, subdivide_vector
 
 
 def run_it_case(problem, solver, e, n_int):
+    s = time.time()
     x = problem["x"]
     p = problem["p"]
     con_list = problem["cons"]
@@ -63,9 +22,6 @@ def run_it_case(problem, solver, e, n_int):
 
     def var_bounds(m, i):
         return (x[i][0], x[i][1])
-
-    def uncertain_bounds(m, i):
-        return (p[i]["val"] - p[i]["unc"], p[i]["val"] + p[i]["unc"])
 
     m_upper = ConcreteModel()
     m_upper.x = Set(initialize=x.keys())
@@ -78,11 +34,26 @@ def run_it_case(problem, solver, e, n_int):
     m_upper.cons = ConstraintList()
 
     p_list = subdivide_vector(p_full, n_int)
-    print("Interval Extensions: ", len(p_list))
+
+    def con_u(x, p, con):
+        return con(x, p).u
+
+    # print("Interval Extensions: ", len(p_list))
     for i in range(len(p_list)):
         for con in con_list:
-            m_upper.cons.add(expr=con(x_vars, p_list[i]) <= 0)
+            m_upper.cons.add(expr=con_u(x_vars, p_list[i], con) <= 0)
     m_upper.obj = Objective(expr=obj(x_vars), sense=minimize)
-    SolverFactory(solver).solve(m_upper)
+    # print('Starting to solve...')
 
-    return value(m_upper.x_vars[:])
+    # print('\nContinuous Variables: ',len(x_vars))
+    # print('Binary Variables: ',(len(m_upper.cons)-len(con_list))*4)
+    # print('Constraints: ',len(m_upper.cons),'\n')
+
+    res = {}
+    SolverFactory(solver).solve(m_upper)
+    e = time.time()
+    wct = e - s
+    res["wallclock_time"] = wct
+    res["solution"] = value(m_upper.x_v[:])
+
+    return res

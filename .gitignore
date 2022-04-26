@@ -4,3 +4,4 @@ preprint/
 paper/
 .pre-commit-config.yaml
 .flake8
+gurobi.log

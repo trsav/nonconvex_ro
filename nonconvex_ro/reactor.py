@@ -1,4 +1,5 @@
-from pyomo.environ import exp
+import pyomo.environ as pyo
+from interval_definitions import Interval, exp
 
 n = 5
 
@@ -26,11 +27,20 @@ def create_reactor_problem(n):
         T = p[4:]
         X = 0
         for i in range(len(V)):
-            tau = V[i] / v
-            k = A * exp(-E / (R * T[i]))
+            tau = (1 / v) * V[i]
+            a = R * T[i]
+            b = 1 / a
+            val = -E * b
+            if val.__class__ is Interval:
+                k = exp(val)
+            else:
+                k = pyo.exp(val)
+            k = A * k
             Da = tau * k
-            X = (X + Da) / (1 + Da)
-        return 0.9 - X
+            Inv = 1 / (1 + Da)
+            X = (X + Da) * Inv
+        ret = 0.9 - X
+        return ret
 
     con_list = [con1]
     return x, p, con_list, obj

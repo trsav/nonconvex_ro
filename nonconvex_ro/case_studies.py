@@ -5,8 +5,8 @@ from toy import create_toy_problem
 from run_bf import run_bf_case
 from run_ms import run_ms_case
 from run_it import run_it_case
+from run_it_rs import run_it_rs_case
 from tqdm import tqdm
-
 
 cases = {}
 x, p, con_list, obj = create_reactor_problem(5)
@@ -38,20 +38,48 @@ problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["toy"] = problem
 
 
-res = run_it_case(cases["reactor_2"], "ipopt", 1e-5, 4)
-
-print(res)
 methods = {
-    "Blankenship-Faulk": run_bf_case,
-    "Restriction of RHS": run_ms_case,
-    "Interval extension restriction": run_it_case,
+    "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All"},
+    "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single"},
+    "Blankenship-Faulk Five": {"fun": run_bf_case, "cut": "Five"},
+    "Restriction of RHS": {"fun": run_ms_case},
+    "MINLP 1 interval extensions": {"fun": run_it_case, "n": 1},
+    "Nonsmooth 1 interval extensions, random search": {
+        "fun": run_it_rs_case,
+        "n": 1,
+        "p": 1000,
+    },
+    "MINLP 10 interval extensions": {"fun": run_it_case, "n": 10},
+    "Nonsmooth 10 interval extensions, random search": {
+        "fun": run_it_rs_case,
+        "n": 10,
+        "p": 1000,
+    },
+    "MINLP 100 interval extensions": {"fun": run_it_case, "n": 100},
+    "Nonsmooth 100 interval extensions, random search": {
+        "fun": run_it_rs_case,
+        "n": 100,
+        "p": 1000,
+    },
 }
-e = 1e-4
+e = 1e-6
 res_overall = {}
-for key, value in methods.items():
+for key, value in tqdm(methods.items()):
+    m = value["fun"]
     res_cases = {}
-    for k in tqdm(list(cases.keys())):
-        res = value(cases[k], "ipopt", e)
+    for k in tqdm(list(cases.keys()), leave=False):
+        if key.split(" ")[0] == "MINLP":
+            n = value["n"]
+            res = m(cases[k], "bonmin", e, n)
+        elif key.split(" ")[0] == "Nonsmooth":
+            n = value["n"]
+            p = value["p"]
+            res = m(cases[k], n, p)
+        elif key.split(" ")[0] == "Blankenship-Faulk":
+            cut = value["cut"]
+            res = m(cases[k], "ipopt", e, cut)
+        else:
+            res = m(cases[k], "ipopt", e)
         res_cases[k] = res
     res_overall[key] = res_cases
 
