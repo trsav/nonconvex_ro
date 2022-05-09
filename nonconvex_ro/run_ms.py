@@ -15,6 +15,9 @@ from pyomo.environ import (
 from pyomo.opt import SolverFactory
 import numpy as np
 import time
+import logging
+
+logging.getLogger("pyomo.core").setLevel(logging.ERROR)
 
 
 def run_ms_case(problem, solver, e):
@@ -26,7 +29,7 @@ def run_ms_case(problem, solver, e):
     def var_bounds(m, i):
         return (x[i][0], x[i][1])
 
-    con = con_list[0]
+    # con = con_list[0]
 
     def uncertain_bounds(m, i):
         return (p[i]["val"] - p[i]["unc"], p[i]["val"] + p[i]["unc"])
@@ -49,7 +52,8 @@ def run_ms_case(problem, solver, e):
     p_nominal = [p[key]["val"] for key in p.keys()]
     x_vars = [LBD.x_v[i] for i in x.keys()]
     LBD.cons = ConstraintList()
-    LBD.cons.add(expr=con(x_vars, p_nominal) <= 0)
+    for con in con_list:
+        LBD.cons.add(expr=con(x_vars, p_nominal) <= 0)
     LBD.obj = Objective(expr=obj(x_vars), sense=minimize)
 
     UBD = ConcreteModel()
@@ -58,11 +62,16 @@ def run_ms_case(problem, solver, e):
     p_nominal = [p[key]["val"] for key in p.keys()]
     x_vars = [UBD.x_v[i] for i in x.keys()]
     UBD.cons = ConstraintList()
-    UBD.e_g = Param(initialize=2, mutable=True, within=Any)
-    UBD.cons.add(expr=con(x_vars, p_nominal) <= -UBD.e_g)
+    e_g = {}
+    c_list = Set(initialize=range(len(con_list)))
+    for i in range(len(con_list)):
+        e_g[i] = 0.001
+    UBD.e_g = Param(c_list, initialize=e_g, mutable=True, within=Any)
+    for i in range(len(con_list)):
+        UBD.cons.add(expr=con_list[i](x_vars, p_nominal) <= -UBD.e_g[i])
     UBD.obj = Objective(expr=obj(x_vars), sense=minimize)
 
-    def build_LLP(x_opt):
+    def build_LLP(x_opt, con):
         LLP = ConcreteModel()
         LLP.p = Set(initialize=p.keys())
         LLP.p_v = Var(LLP.p, domain=Reals, bounds=uncertain_bounds)
@@ -70,18 +79,17 @@ def run_ms_case(problem, solver, e):
         LLP.obj = Objective(expr=con(x_opt, param_vars), sense=maximize)
         return LLP
 
-    LBD_list = [p_nominal]
-    UBD_list = [p_nominal]
     sip_upper_bound = [0]
     sip_lower_bound = [0]
     lb_store = []
     ub_store = []
 
     x_list = []
-    e_g_list = []
+
     while f_ubd - f_lbd > e_f:
         sip_upper_bound.append(f_ubd)
         sip_lower_bound.append(f_lbd)
+
         SolverFactory(solver).solve(LBD)
         cons_count += len(LBD.cons)
         problem_count += 1
@@ -90,52 +98,70 @@ def run_ms_case(problem, solver, e):
         ub_store.append(f_ubd)
         x_opt = value(LBD.x_v[:])
         x_list.append(x_opt)
-        e_g_list.append(value(UBD.e_g))
 
-        LLP = build_LLP(x_opt)
-        SolverFactory(solver).solve(LLP)
+        LLP_vals = []
+        for con in con_list:
+            LLP = build_LLP(x_opt, con)
+            try:
+                SolverFactory(solver).solve(LLP)
+            except ValueError:
+                pass
+            problem_count += 1
+            p_opt = value(LLP.p_v[:])
+            for i_p in range(len(p_opt)):
+                if p_opt[i_p] is None:
+                    p_opt[i_p] = p_nominal[i_p]
+            LLP_vals.append(value(LLP.obj))
+            LBD.cons.add(expr=con([LBD.x_v[i] for i in x.keys()], p_opt) <= 0)
+            cut_count += 1
 
-        problem_count += 1
-
-        if value(LLP.obj) < 0:
+        if max(LLP_vals) < 0:
             f_ubd = obj(x_opt)
-            break
-
-        p_opt = value(LLP.p_v[:])
-        LBD_list.append(p_opt)
-        LBD.cons.add(expr=con([LBD.x_v[i] for i in x.keys()], p_opt) <= 0)
-        cut_count += 1
+            res = {}
+            end = time.time()
+            wct = end - start
+            res["wallclock_time"] = wct
+            res["problems_solved"] = problem_count
+            res["average_constraints_in_any_problem"] = cons_count / problem_count
+            res["constraints_added"] = cut_count
+            res["SIP_lower_bound"] = sip_lower_bound[1:]
+            res["SIP_upper_bound"] = sip_upper_bound[1:]
+            res["solution"] = x_opt
+            return res
 
         res = SolverFactory(solver).solve(UBD)
         cons_count += len(UBD.cons)
 
         problem_count += 1
-
-        if res.solver.termination_condition != TerminationCondition.infeasible:
+        term_con = res.solver.termination_condition
+        if term_con != TerminationCondition.infeasible:
             x_opt = value(UBD.x_v[:])
 
-            LLP = build_LLP(x_opt)
-            SolverFactory(solver).solve(LLP)
+            for i in range(len(con_list)):
+                LLP = build_LLP(x_opt, con_list[i])
+                SolverFactory(solver).solve(LLP)
+                problem_count += 1
+                v = value(LLP.obj)
 
-            problem_count += 1
-            v = value(LLP.obj)
+                if v < 0:
+                    f_x = obj(x_opt)
+                    if f_x <= f_ubd:
+                        f_ubd = f_x
 
-            if v < 0:
-                f_x = obj(x_opt)
-                if f_x <= f_ubd:
-                    f_ubd = f_x
+                    UBD.e_g[i] = value(UBD.e_g[:])[i] / r
+                else:
+                    p_opt = value(LLP.p_v[:])
+                    for i_p in range(len(p_opt)):
+                        if p_opt[i_p] is None:
+                            p_opt[i_p] = p_nominal[i_p]
 
-                UBD_list.append(None)
-                UBD.e_g = value(UBD.e_g) / r
+                    UBD.cons.add(
+                        expr=con_list[i]([UBD.x_v[i] for i in x.keys()], p_opt)
+                        <= -UBD.e_g[i]
+                    )
+                    cut_count += 1
             else:
-                p_opt = value(LLP.p_v[:])
-                UBD_list.append(p_opt)
-                UBD.cons.add(
-                    expr=con([UBD.x_v[i] for i in x.keys()], p_opt) <= -UBD.e_g
-                )
-                cut_count += 1
-        else:
-            UBD.e_g = value(UBD.e_g) / r
+                UBD.e_g[i] = value(UBD.e_g[:])[i] / r
 
     end = time.time()
     wct = end - start
@@ -147,5 +173,6 @@ def run_ms_case(problem, solver, e):
     res["constraints_added"] = cut_count
     res["SIP_lower_bound"] = sip_lower_bound[1:]
     res["SIP_upper_bound"] = sip_upper_bound[1:]
+    res["solution"] = x_opt
 
     return res

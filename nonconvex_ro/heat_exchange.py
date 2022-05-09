@@ -133,11 +133,13 @@ def create_heat_exchange_problem():
         h = b - a - w
         Dh = (4 * h * s) / (2 * (h + s))
         S1 = (W * h * s) / (w + s) * (H / (2 * b))
-        sigma_1 = S1 / (W * H)
-        v1 = M_1 / (rho_1 * S1)
-        Re_1 = (v1 * Dh * rho_1) / eta
-        f1 = sigma_1 * (Re_1) ** (-0.44)
-        DP_1 = (((v1 * rho_1) ** 2) / (2 * rho_1)) * (K + (4 * f1 * (L / Dh)))
+        sigma_1 = S1 * (1 / (W * H))
+        v1 = M_1 * (1 / (rho_1 * S1))
+        Re_1 = (v1 * Dh * rho_1) * (1 / eta)
+        f1 = sigma_1 * (1 / ((Re_1) ** (0.44)))
+        DP_1 = (((v1 * rho_1) ** 2) * (1 / (2 * rho_1))) * (
+            K + (4 * f1 * (L * (1 / Dh)))
+        )
         return DP_1 - 1500
 
     def con3(x, p):
@@ -146,12 +148,13 @@ def create_heat_exchange_problem():
         h = b - a - w
         Dh = (4 * h * s) / (2 * (h + s))
         S2 = (L * h * s) / (w + s) * (H / (2 * b))
-        sigma_2 = S2 / (W * H)
-        v2 = M_2 / (rho_2 * S2)
-        Re_2 = (v2 * Dh * rho_2) / eta
-        # T_1_out = T_1_in + Q / (U_p * Ap)
-        f2 = sigma_2 * (Re_2) ** (-0.44)
-        DP_2 = (((v2 * rho_2) ** 2) / (2 * rho_2)) * (K + (4 * f2 * (L / Dh)))
+        sigma_2 = S2 * (1 / (W * H))
+        v2 = M_2 * (1 / (rho_2 * S2))
+        Re_2 = (v2 * Dh * rho_2) * (1 / eta)
+        f2 = sigma_2 * (1 / ((Re_2) ** (0.44)))
+        DP_2 = (((v2 * rho_2) ** 2) * (1 / (2 * rho_2))) * (
+            K + (4 * f2 * (L * (1 / Dh)))
+        )
         return DP_2 - 500
 
     con_list = [con1, con2, con3]

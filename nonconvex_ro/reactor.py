@@ -1,8 +1,6 @@
 import pyomo.environ as pyo
 from interval_definitions import Interval, exp
 
-n = 5
-
 
 def create_reactor_problem(n):
     p = {}
@@ -15,7 +13,7 @@ def create_reactor_problem(n):
 
     x = {}
     for i in range(n):
-        x["V" + str(i + 1)] = [1, 100]
+        x["V" + str(i + 1)] = [0.1, 100]
 
     def obj(x):
         V = x
@@ -46,7 +44,8 @@ def create_reactor_problem(n):
     return x, p, con_list, obj
 
 
-x, p, con_list, obj = create_reactor_problem(5)
+# n = 5
+# x, p, con_list, obj = create_reactor_problem(n)
 
 
 # # uncomment to run plot

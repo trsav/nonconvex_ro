@@ -68,7 +68,6 @@ for con in con_list:
     m_upper.cons.add(expr=con(x_vars, p_nominal) <= 0)
 m_upper.obj = Objective(expr=obj(x_vars), sense=minimize)
 
-
 SolverFactory("baron").solve(m_upper)
 x_opt = value(m_upper.x_v[:])
 

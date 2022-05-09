@@ -2,14 +2,12 @@ from pyomo.environ import (
     ConcreteModel,
     Var,
     Reals,
-    value,
     Set,
     ConstraintList,
     Objective,
     minimize,
 )
 import time
-from pyomo.opt import SolverFactory
 from interval_definitions import Interval, subdivide_vector
 
 
@@ -43,18 +41,24 @@ def run_it_case(problem, solver, e, n_int):
         for con in con_list:
             m_upper.cons.add(expr=con_u(x_vars, p_list[i], con) <= 0)
     m_upper.obj = Objective(expr=obj(x_vars), sense=minimize)
-    # print('Starting to solve...')
+    print("Starting to solve...")
 
-    # print('\nContinuous Variables: ',len(x_vars))
-    # print('Binary Variables: ',(len(m_upper.cons)-len(con_list))*4)
-    # print('Constraints: ',len(m_upper.cons),'\n')
-
+    bin_vars = int(((len(m_upper._decl) - 5) / 2) * 4)
     res = {}
-    SolverFactory(solver).solve(m_upper)
+    res["vars"] = len(x_vars)
+    res["cons"] = len(m_upper.cons)
+    res["bin_vars"] = bin_vars
+
+    # try:
+    #     SolverFactory(solver).solve(m_upper)
+    #     res["solution"] = value(m_upper.x_v[:])
+    #     res["objective"] = value(m_upper.obj)
+    # except:
+    #     res["solution"] = None
+    #     res["objective"] = None
+
     e = time.time()
     wct = e - s
     res["wallclock_time"] = wct
-    res["solution"] = value(m_upper.x_v[:])
-    res["objective"] = value(m_upper.obj)
 
     return res

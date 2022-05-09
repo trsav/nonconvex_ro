@@ -2,13 +2,14 @@ from pyomo.environ import (
     ConcreteModel,
     Var,
     Reals,
-    value,
     Set,
     ConstraintList,
     Objective,
     minimize,
+    SolverFactory,
+    value,
 )
-from pyomo.opt import SolverFactory
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import colors

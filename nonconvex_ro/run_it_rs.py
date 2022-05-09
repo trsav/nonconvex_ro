@@ -4,7 +4,11 @@ from interval_definitions import Interval, subdivide_vector
 
 
 def con_u(x, p, con):
-    return con(x, p).u
+    i = con(x, p)
+    if i.__class__ is Interval:
+        return i.u
+    else:
+        return i
 
 
 def random_search(obj, con_list, p, bounds, n_int, it):
@@ -12,7 +16,7 @@ def random_search(obj, con_list, p, bounds, n_int, it):
     p_u = [p[key]["val"] + p[key]["unc"] for key in p.keys()]
     p_full = [Interval(p_l[i], p_u[i]) for i in range(len(p_l))]
     p_list = subdivide_vector(p_full, n_int)
-    sample = np.random.uniform(bounds[:, 0], bounds[:, 1], (it, 2))
+    sample = np.random.uniform(bounds[:, 0], bounds[:, 1], (it, len(bounds)))
     func_evals = 0
     con_vals = []
     valid_points = [0 for i in range(it)]
@@ -44,8 +48,10 @@ def random_search(obj, con_list, p, bounds, n_int, it):
         if f < f_min:
             f_min = f
             best_index = i
-
-    return sample[best_index], f_min
+    try:
+        return sample[best_index], f_min
+    except UnboundLocalError:
+        return None, None
 
 
 def run_it_rs_case(problem, n_int, it):

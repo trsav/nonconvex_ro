@@ -1,11 +1,15 @@
 import time
 import numpy as np
 from interval_definitions import Interval, subdivide_vector
-from scipy.optimize import minimize
+from scipy.optimize import minimize, Bounds
 
 
 def con_u(x, p, con):
-    return con(x, p).u
+    i = con(x, p)
+    if i.__class__ is Interval:
+        return i.u
+    else:
+        return i
 
 
 def con_u_ineq(x, p, con):
@@ -31,10 +35,11 @@ def run_it_slsqp_case(problem, n_int, it, e):
             con_dict["fun"] = con_u_ineq
             con_dict["args"] = [p_val, con]
             cons.append(con_dict)
-
+    x0 = np.mean(bounds, axis=1)
+    bounds = Bounds([b[0] for b in bounds], [b[1] for b in bounds])
     r = minimize(
         obj,
-        x0=np.mean(bounds, axis=0),
+        x0=x0,
         method="SLSQP",
         constraints=cons,
         bounds=bounds,

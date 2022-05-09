@@ -9,7 +9,6 @@ from pyomo.environ import (
 import matplotlib.pyplot as plt
 from matplotlib import colors
 import numpy as np
-import matplotlib.patches as patches
 
 
 def obj(x):
@@ -27,7 +26,7 @@ n = 600
 x1 = np.linspace(-2.25, 2.25, n)
 x2 = np.linspace(-2.25, 2.25, n)
 X1, X2 = np.meshgrid(x1, x2)
-p_list = np.linspace(0, 2, 10)
+p_list = np.linspace(0, 2, 14)
 
 fig, ax = plt.subplots(figsize=(6, 5))
 ax.set_xlabel("$x_1$")
@@ -71,13 +70,13 @@ for p in p_list:
         linestyles="dashed",
         alpha=0.7,
     )
-for sol in sol_list:
-    ax.scatter(sol[0], sol[1], c="w", zorder=2)
+# for sol in sol_list:
+#     ax.scatter(sol[0], sol[1], c="w", zorder=2)
 
-rect = patches.Rectangle(
-    (-2, -2), 4, 4, linewidth=1, edgecolor="k", facecolor="none", ls="dashed"
-)
+# rect = patches.Rectangle(
+#     (-2, -2), 4, 4, linewidth=1, edgecolor="k", facecolor="none", ls="dashed"
+# )
 
 # Add the patch to the Axes
-ax.add_patch(rect)
+# ax.add_patch(rect)
 plt.savefig("output_images/robust_example.pdf")
