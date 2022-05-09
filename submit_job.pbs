@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -N ncro
+#PBS -j oe 
+#PBS -o ncro.out
+#PBS -e ncro.err
+#PBS -lselect=1:ncpus=8:mem=16gb
+#PBS -lwalltime=2:00:00
+
+module load anaconda3/personal
+
+cd $PBS_O_WORKDIR
+conda env create -f environment.yml 
+source activate nonconvex_ro_env
+python3 nonconvex_ro/case_studies.py
