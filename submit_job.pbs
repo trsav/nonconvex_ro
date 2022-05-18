@@ -3,8 +3,8 @@
 #PBS -j oe 
 #PBS -o ncro.out
 #PBS -e ncro.err
-#PBS -lselect=1:ncpus=8:mem=16gb
-#PBS -lwalltime=2:00:00
+#PBS -lselect=1:ncpus=16:mem=32gb
+#PBS -lwalltime=4:00:00
 
 module load anaconda3/personal
 

@@ -135,10 +135,14 @@ for key, value in methods.items():
             res = run(key, value, m)
             res_cases[k] = res
         except TimeoutException:
-            res = {}
+            res = {"ERROR":'TIMEOUT'}
             res_cases[k] = res
-
             continue  # continue the for loop if function takes more than 5 second
+        except ValueError:
+            res = {'ERROR':'FAIL'}
+            res_cases[k] = res
+            continue
+
         else:
             signal.alarm(0)
     res_overall[key] = res_cases

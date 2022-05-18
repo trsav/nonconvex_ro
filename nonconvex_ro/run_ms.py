@@ -59,6 +59,8 @@ def run_ms_case(problem, solver, e):
     UBD = ConcreteModel()
     UBD.x = Set(initialize=x.keys())
     UBD.x_v = Var(UBD.x, domain=Reals, bounds=var_bounds)
+
+
     p_nominal = [p[key]["val"] for key in p.keys()]
     x_vars = [UBD.x_v[i] for i in x.keys()]
     UBD.cons = ConstraintList()
@@ -90,7 +92,11 @@ def run_ms_case(problem, solver, e):
         sip_upper_bound.append(f_ubd)
         sip_lower_bound.append(f_lbd)
 
-        SolverFactory(solver).solve(LBD)
+        try:
+            SolverFactory(solver).solve(LBD)
+        except ValueError:
+            print('Problem is infeasible?... cannot find a lower bound')
+            return {}
         cons_count += len(LBD.cons)
         problem_count += 1
         f_lbd = value(LBD.obj)
