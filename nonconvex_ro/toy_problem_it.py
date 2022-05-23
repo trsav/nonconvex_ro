@@ -81,7 +81,7 @@ def plot_upper(x_list, n_list):
     fig, axs = plt.subplots(1, len(x_list), figsize=(16, 3))
     plt.subplots_adjust(left=0.025, right=0.975)
     n = 500
-    levels = 40
+    levels = 15
     x1 = np.linspace(x["x1"][0], x["x1"][1], n)
     x2 = np.linspace(x["x2"][0], x["x2"][1], n)
     X1, X2 = np.meshgrid(x1, x2)
@@ -91,7 +91,7 @@ def plot_upper(x_list, n_list):
             x_eval = [X1[i, j], X2[i, j]]
             Z[i, j] = obj(x_eval)
     for ax in axs:
-        ax.contourf(X1, X2, Z, levels, cmap="plasma")
+        ax.contourf(X1, X2, Z, levels, cmap="gray")
         ax.set_xticks([], [])
         ax.set_yticks([], [])
 
@@ -162,7 +162,7 @@ def plot_upper(x_list, n_list):
         else:
             axs[k].set_title(str(n_list[k] - 1) + " intervals")
 
-    plt.savefig("output_images/toy_it_results.pdf")
+    plt.savefig("figures/interval_example.pdf")
     return
 
 

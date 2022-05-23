@@ -36,7 +36,7 @@ def random_search(obj, con_list, p, bounds, n_int, it):
             if valid_points[j] == 1:
                 break
         j += 1
-
+    cons = len(con_list) * len(p_list)
     valid_indices = []
     for i in range(len(valid_points)):
         if valid_points[i] == 0:
@@ -49,9 +49,9 @@ def random_search(obj, con_list, p, bounds, n_int, it):
             f_min = f
             best_index = i
     try:
-        return sample[best_index], f_min
+        return sample[best_index], f_min, cons
     except UnboundLocalError:
-        return None, None
+        return "N/A", "N/A", cons
 
 
 def run_it_rs_case(problem, n_int, it):
@@ -61,12 +61,29 @@ def run_it_rs_case(problem, n_int, it):
     con_list = problem["cons"]
     obj = problem["obj"]
     bounds = np.array([[i[0], i[1]] for i in x.values()])
-    sol, val = random_search(obj, con_list, p, bounds, n_int, it)
+    sol, val, cons = random_search(obj, con_list, p, bounds, n_int, it)
     e = time.time()
     wct = e - s
     res = {}
     res["wallclock_time"] = wct
+    res["problems_solved"] = 1
+    res["average_constraints_in_any_problem"] = cons
     res["solution"] = sol
     res["objective"] = val
 
+    return res
+
+
+def it_rs_data(problem, n_int, it):
+    res = {}
+    res["wallclock_time"] = "N/A"
+    res["problems_solved"] = 0
+    p = problem["p"]
+    con_list = problem["cons"]
+    p_l = [p[key]["val"] - p[key]["unc"] for key in p.keys()]
+    p_u = [p[key]["val"] + p[key]["unc"] for key in p.keys()]
+    p_full = [Interval(p_l[i], p_u[i]) for i in range(len(p_l))]
+    p_list = subdivide_vector(p_full, n_int)
+    cons = len(con_list) * len(p_list)
+    res["average_constraints_in_any_problem"] = cons
     return res

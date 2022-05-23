@@ -12,3 +12,4 @@ cd $PBS_O_WORKDIR
 conda env create -f environment.yml 
 source activate nonconvex_ro_env
 python3 nonconvex_ro/case_studies.py
+python3 nonconvex_ro/results_analysis.py

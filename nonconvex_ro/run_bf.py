@@ -124,3 +124,11 @@ def run_bf_case(problem, solver, e, cut):
     res["solution"] = x_opt
 
     return res
+
+
+def bf_data(problem, solver, e, cut):
+    res = {}
+    res["wallclock_time"] = "N/A"
+    res["problems_solved"] = "N/A"
+    res["average_constraints_in_any_problem"] = "N/A"
+    return res

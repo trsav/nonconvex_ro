@@ -52,6 +52,22 @@ def run_it_slsqp_case(problem, n_int, it, e):
     res["wallclock_time"] = wct
     res["solution"] = r.x
     res["objective"] = r.fun
-    res["constraints"] = len(cons)
+    res["problems_solved"] = 1
+    res["average_constraints_in_any_problem"] = len(cons)
 
+    return res
+
+
+def it_slsqp_data(problem, n_int, it):
+    res = {}
+    res["wallclock_time"] = "N/A"
+    res["problems_solved"] = 0
+    p = problem["p"]
+    con_list = problem["cons"]
+    p_l = [p[key]["val"] - p[key]["unc"] for key in p.keys()]
+    p_u = [p[key]["val"] + p[key]["unc"] for key in p.keys()]
+    p_full = [Interval(p_l[i], p_u[i]) for i in range(len(p_l))]
+    p_list = subdivide_vector(p_full, n_int)
+    cons = len(con_list) * len(p_list)
+    res["average_constraints_in_any_problem"] = cons
     return res

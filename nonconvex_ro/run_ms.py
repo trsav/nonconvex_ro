@@ -60,7 +60,6 @@ def run_ms_case(problem, solver, e):
     UBD.x = Set(initialize=x.keys())
     UBD.x_v = Var(UBD.x, domain=Reals, bounds=var_bounds)
 
-
     p_nominal = [p[key]["val"] for key in p.keys()]
     x_vars = [UBD.x_v[i] for i in x.keys()]
     UBD.cons = ConstraintList()
@@ -95,7 +94,7 @@ def run_ms_case(problem, solver, e):
         try:
             SolverFactory(solver).solve(LBD)
         except ValueError:
-            print('Problem is infeasible?... cannot find a lower bound')
+            print("Problem is infeasible?... cannot find a lower bound")
             return {}
         cons_count += len(LBD.cons)
         problem_count += 1
@@ -181,4 +180,12 @@ def run_ms_case(problem, solver, e):
     res["SIP_upper_bound"] = sip_upper_bound[1:]
     res["solution"] = x_opt
 
+    return res
+
+
+def ms_data(problem, solver, e):
+    res = {}
+    res["wallclock_time"] = "N/A"
+    res["problems_solved"] = "N/A"
+    res["average_constraints_in_any_problem"] = "N/A"
     return res
