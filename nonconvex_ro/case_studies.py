@@ -58,11 +58,11 @@ print(problem_res.to_latex(index=False))
 # print(res)
 
 methods = {
+    "MINLP IE 1": {"fun": run_it_case, "n": 1, "data": it_data},
     "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All", "data": bf_data},
     "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single", "data": bf_data},
     "Blankenship-Faulk Five": {"fun": run_bf_case, "cut": "Five", "data": bf_data},
     "Restriction of RHS": {"fun": run_ms_case, "data": ms_data},
-    "MINLP IE 1": {"fun": run_it_case, "n": 1, "data": it_data},
     "Nonsmooth IE 1, RS": {
         "fun": run_it_rs_case,
         "data": it_rs_data,
@@ -121,7 +121,7 @@ def run(key, value, m):
     e = 1e-4
     if key.split(" ")[0] == "MINLP":
         n = value["n"]
-        res = m(cases[k], "bonmin", e, n)
+        res = m(cases[k], "mindtpy", e, n)
     elif key.split(" ")[0] == "Nonsmooth":
         if key.split(" ")[-1] == "search":
             n = value["n"]

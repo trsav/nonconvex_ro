@@ -1,0 +1,855 @@
+
+CondaValueError: prefix already exists: /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env
+
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:55: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_res.to_latex(index=False))
+\begin{tabular}{lllr}
+\toprule
+         case & variables & constraints &  parameters \\
+\midrule
+    reactor\_5 &         5 &           1 &         9.0 \\
+    reactor\_3 &         3 &           1 &         7.0 \\
+    reactor\_2 &         2 &           1 &         6.0 \\
+     supply\_5 &        13 &          13 &        27.0 \\
+    supply\_10 &        37 &          22 &        64.0 \\
+    supply\_20 &       111 &          38 &       162.0 \\
+    supply\_50 &       551 &          86 &       675.0 \\
+heat\_exchange &         7 &           3 &        13.0 \\
+          toy &         2 &           1 &         1.0 \\
+\bottomrule
+\end{tabular}
+
+SOLVING  reactor_5  USING  Blankenship-Faulk All
+SOLVING  reactor_3  USING  Blankenship-Faulk All
+SOLVING  reactor_2  USING  Blankenship-Faulk All
+SOLVING  supply_5  USING  Blankenship-Faulk All
+SOLVING  supply_10  USING  Blankenship-Faulk All
+SOLVING  supply_20  USING  Blankenship-Faulk All
+SOLVING  supply_50  USING  Blankenship-Faulk All
+SOLVING  heat_exchange  USING  Blankenship-Faulk All
+SOLVING  toy  USING  Blankenship-Faulk All
+SOLVING  reactor_5  USING  Blankenship-Faulk Single
+SOLVING  reactor_3  USING  Blankenship-Faulk Single
+SOLVING  reactor_2  USING  Blankenship-Faulk Single
+SOLVING  supply_5  USING  Blankenship-Faulk Single
+SOLVING  supply_10  USING  Blankenship-Faulk Single
+SOLVING  supply_20  USING  Blankenship-Faulk Single
+SOLVING  supply_50  USING  Blankenship-Faulk Single
+ERROR: Constructing component 'p' from data=None failed: TimeoutException:
+SOLVING  heat_exchange  USING  Blankenship-Faulk Single
+SOLVING  toy  USING  Blankenship-Faulk Single
+SOLVING  reactor_5  USING  Blankenship-Faulk Five
+SOLVING  reactor_3  USING  Blankenship-Faulk Five
+SOLVING  reactor_2  USING  Blankenship-Faulk Five
+SOLVING  supply_5  USING  Blankenship-Faulk Five
+SOLVING  supply_10  USING  Blankenship-Faulk Five
+SOLVING  supply_20  USING  Blankenship-Faulk Five
+SOLVING  supply_50  USING  Blankenship-Faulk Five
+SOLVING  heat_exchange  USING  Blankenship-Faulk Five
+SOLVING  toy  USING  Blankenship-Faulk Five
+SOLVING  reactor_5  USING  Restriction of RHS
+SOLVING  reactor_3  USING  Restriction of RHS
+SOLVING  reactor_2  USING  Restriction of RHS
+SOLVING  supply_5  USING  Restriction of RHS
+SOLVING  supply_10  USING  Restriction of RHS
+SOLVING  supply_20  USING  Restriction of RHS
+Problem is infeasible?... cannot find a lower bound
+SOLVING  supply_50  USING  Restriction of RHS
+SOLVING  heat_exchange  USING  Restriction of RHS
+SOLVING  toy  USING  Restriction of RHS
+SOLVING  reactor_5  USING  MINLP IE 1
+Starting to solve...
+WARNING: Failed to create solver with name 'bonmin': Failed to set executable
+    for solver asl. File with name=bonmin either does not exist or it is not
+    executable. To skip this validation, call set_executable with
+    validate=False.
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 165, in __call__
+    opt = self._cls[_implicit_solvers[mode]](**kwds)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/solvers/plugins/solvers/ASL.py", line 43, in __init__
+    SystemCallSolver.__init__(self, **kwds)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 55, in __init__
+    self.set_executable(name=executable, validate=validate)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 103, in set_executable
+    raise ValueError(
+ValueError: Failed to set executable for solver asl. File with name=bonmin either does not exist or it is not executable. To skip this validation, call set_executable with validate=False.
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 154, in <module>
+    res = run(key, value, m)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 124, in run
+    res = m(cases[k], "bonmin", e, n)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_it.py", line 54, in run_it_case
+    SolverFactory(solver).solve(m_upper)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 105, in solve
+    self._solver_error('solve')
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 122, in _solver_error
+    raise RuntimeError("""Attempting to use an unavailable solver.
+RuntimeError: Attempting to use an unavailable solver.
+
+The SolverFactory was unable to create the solver "bonmin"
+and returned an UnknownSolver object.  This error is raised at the point
+where the UnknownSolver object was used as if it were valid (by calling
+method "solve").
+
+The original solver was created with the following parameters:
+	executable: bonmin
+	type: bonmin
+	_args: ()
+	options: {}
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+\begin{tabular}{llllllllll}
+\toprule
+{} & \multicolumn{3}{l}{wallclock\_time} & \multicolumn{3}{l}{problems\_solved} & \multicolumn{3}{l}{average\_constraints\_in\_any\_problem} \\
+{} &              5 &      3 &      2 &               5 &   3 &   2 &                                  5 &      3 &      2 \\
+\midrule
+Blankenship-Faulk All    &          0.668 &  0.146 &  0.137 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Single &           0.16 &  0.158 &  0.158 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Five   &          0.096 &  0.102 &  0.089 &               2 &   2 &   2 &                                0.5 &    0.5 &    0.5 \\
+Restriction of RHS       &          2.039 &  1.768 &  1.701 &              36 &  36 &  36 &                              1.722 &  1.722 &  1.722 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lllllllllllll}
+\toprule
+{} & \multicolumn{4}{l}{wallclock\_time} & \multicolumn{4}{l}{problems\_solved} & \multicolumn{4}{l}{average\_constraints\_in\_any\_problem} \\
+{} &             5  &     10 &     20 &      50 &              5  &   10 &   20 &   50 &                                 5  &     10 &     20 &     50 \\
+\midrule
+Blankenship-Faulk All    &          2.518 &  3.247 &  3.849 &  37.232 &              70 &   85 &   87 &  670 &                              1.943 &  1.824 &  1.529 &  1.661 \\
+Blankenship-Faulk Single &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+Blankenship-Faulk Five   &          0.617 &  1.043 &  1.659 &   5.309 &              10 &   17 &   29 &   67 &                                1.3 &  1.294 &   1.31 &  1.284 \\
+Restriction of RHS       &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.583 &              12 &                              1.167 \\
+Blankenship-Faulk Single &          1.013 &              16 &                              1.125 \\
+Blankenship-Faulk Five   &          0.295 &               4 &                               0.75 \\
+Restriction of RHS       &          0.646 &              16 &                              1.062 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.803 &              20 &                               2.75 \\
+Blankenship-Faulk Single &           0.86 &              20 &                               2.75 \\
+Blankenship-Faulk Five   &          0.083 &               2 &                                0.5 \\
+Restriction of RHS       &          1.567 &              44 &                                3.0 \\
+\bottomrule
+\end{tabular}
+
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+
+Downloading and Extracting Packages
+certifi-2022.5.18.1  | 150 KB    |            |   0% certifi-2022.5.18.1  | 150 KB    | #          |  11% certifi-2022.5.18.1  | 150 KB    | ########## | 100% certifi-2022.5.18.1  | 150 KB    | ########## | 100% 
+traitlets-5.2.1.post | 85 KB     |            |   0% traitlets-5.2.1.post | 85 KB     | ########## | 100% traitlets-5.2.1.post | 85 KB     | ########## | 100% 
+coinbonmin-1.8.8     | 548 KB    |            |   0% coinbonmin-1.8.8     | 548 KB    | 2          |   3% coinbonmin-1.8.8     | 548 KB    | ######7    |  67% coinbonmin-1.8.8     | 548 KB    | ########## | 100% 
+coin-or-cgl-0.60.6   | 591 KB    |            |   0% coin-or-cgl-0.60.6   | 591 KB    | ########## | 100% coin-or-cgl-0.60.6   | 591 KB    | ########## | 100% 
+typed-ast-1.5.4      | 220 KB    |            |   0% typed-ast-1.5.4      | 220 KB    | 7          |   7% typed-ast-1.5.4      | 220 KB    | ########   |  80% typed-ast-1.5.4      | 220 KB    | ########## | 100% 
+coin-or-utils-2.11.6 | 744 KB    |            |   0% coin-or-utils-2.11.6 | 744 KB    | ########## | 100% coin-or-utils-2.11.6 | 744 KB    | ########## | 100% 
+pip-22.1.1           | 1.5 MB    |            |   0% pip-22.1.1           | 1.5 MB    | ######4    |  65% pip-22.1.1           | 1.5 MB    | ########## | 100% 
+coin-or-clp-1.17.6   | 1.2 MB    |            |   0% coin-or-clp-1.17.6   | 1.2 MB    | ########## | 100% coin-or-clp-1.17.6   | 1.2 MB    | ########## | 100% 
+liblapacke-3.9.0     | 12 KB     |            |   0% liblapacke-3.9.0     | 12 KB     | ########## | 100% 
+ca-certificates-2022 | 144 KB    |            |   0% ca-certificates-2022 | 144 KB    | ########## | 100% ca-certificates-2022 | 144 KB    | ########## | 100% 
+jupyter_core-4.10.0  | 81 KB     |            |   0% jupyter_core-4.10.0  | 81 KB     | ########## | 100% jupyter_core-4.10.0  | 81 KB     | ########## | 100% 
+coin-or-cbc-2.10.8   | 1.0 MB    |            |   0% coin-or-cbc-2.10.8   | 1.0 MB    | ########## | 100% coin-or-cbc-2.10.8   | 1.0 MB    | ########## | 100% 
+psutil-5.9.1         | 350 KB    |            |   0% psutil-5.9.1         | 350 KB    | ########## | 100% psutil-5.9.1         | 350 KB    | ########## | 100% 
+pyzmq-23.0.0         | 478 KB    |            |   0% pyzmq-23.0.0         | 478 KB    | ########## | 100% pyzmq-23.0.0         | 478 KB    | ########## | 100% 
+scipy-1.8.1          | 25.0 MB   |            |   0% scipy-1.8.1          | 25.0 MB   | #5         |  16% scipy-1.8.1          | 25.0 MB   | #####8     |  58% scipy-1.8.1          | 25.0 MB   | ########7  |  88% scipy-1.8.1          | 25.0 MB   | ########## | 100% 
+cvxpy-1.2.1          | 89 KB     |            |   0% cvxpy-1.2.1          | 89 KB     | #7         |  18% cvxpy-1.2.1          | 89 KB     | ########## | 100% cvxpy-1.2.1          | 89 KB     | ########## | 100% 
+setuptools-62.3.2    | 1.3 MB    |            |   0% setuptools-62.3.2    | 1.3 MB    | ########## | 100% setuptools-62.3.2    | 1.3 MB    | ########## | 100% 
+cvxpy-base-1.2.1     | 977 KB    |            |   0% cvxpy-base-1.2.1     | 977 KB    | 1          |   2% cvxpy-base-1.2.1     | 977 KB    | ###1       |  31% cvxpy-base-1.2.1     | 977 KB    | ####4      |  44% cvxpy-base-1.2.1     | 977 KB    | ######7    |  67% cvxpy-base-1.2.1     | 977 KB    | #########  |  90% cvxpy-base-1.2.1     | 977 KB    | ########## | 100% 
+coin-or-osi-0.108.7  | 435 KB    |            |   0% coin-or-osi-0.108.7  | 435 KB    | ########## | 100% coin-or-osi-0.108.7  | 435 KB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Installing pip dependencies: ...working... Ran pip subprocess with arguments:
+['/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/python', '-m', 'pip', 'install', '-U', '-r', '/rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt']
+Pip subprocess output:
+Collecting absl-py
+  Using cached absl_py-1.0.0-py3-none-any.whl (126 kB)
+Collecting attrs
+  Using cached attrs-21.4.0-py2.py3-none-any.whl (60 kB)
+Collecting cfgv
+  Using cached cfgv-3.3.1-py2.py3-none-any.whl (7.3 kB)
+Collecting cvx
+  Using cached cvx-0.1.3-py3-none-any.whl
+Collecting distlib
+  Using cached distlib-0.3.4-py2.py3-none-any.whl (461 kB)
+Collecting filelock
+  Using cached filelock-3.7.0-py3-none-any.whl (10 kB)
+Collecting flatbuffers
+  Using cached flatbuffers-2.0-py2.py3-none-any.whl (26 kB)
+Collecting identify
+  Downloading identify-2.5.1-py2.py3-none-any.whl (98 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.6/98.6 kB 2.6 MB/s eta 0:00:00
+Collecting iniconfig
+  Using cached iniconfig-1.1.1-py2.py3-none-any.whl (5.0 kB)
+Collecting jax
+  Using cached jax-0.3.13-py3-none-any.whl
+Collecting jaxlib
+  Using cached jaxlib-0.3.10-cp310-none-manylinux2014_x86_64.whl (69.0 MB)
+Collecting jaxopt
+  Using cached jaxopt-0.3.1-py3-none-any.whl (112 kB)
+Collecting nodeenv
+  Using cached nodeenv-1.6.0-py2.py3-none-any.whl (21 kB)
+Collecting opt-einsum
+  Using cached opt_einsum-3.3.0-py3-none-any.whl (65 kB)
+Collecting pluggy
+  Using cached pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+Collecting ply
+  Using cached ply-3.11-py2.py3-none-any.whl (49 kB)
+Collecting pre-commit
+  Using cached pre_commit-2.19.0-py2.py3-none-any.whl (199 kB)
+Collecting py
+  Using cached py-1.11.0-py2.py3-none-any.whl (98 kB)
+Collecting pybind11
+  Using cached pybind11-2.9.2-py2.py3-none-any.whl (213 kB)
+Collecting pyomo
+  Using cached Pyomo-6.4.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (10.4 MB)
+Collecting pytest
+  Using cached pytest-7.1.2-py3-none-any.whl (297 kB)
+Collecting pyyaml
+  Using cached PyYAML-6.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (682 kB)
+Collecting toml
+  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting tqdm
+  Using cached tqdm-4.64.0-py2.py3-none-any.whl (78 kB)
+Collecting virtualenv
+  Using cached virtualenv-20.14.1-py2.py3-none-any.whl (8.8 MB)
+Requirement already satisfied: six in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from absl-py->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 1)) (1.16.0)
+Requirement already satisfied: numpy in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from cvx->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 4)) (1.22.3)
+Requirement already satisfied: typing-extensions in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 10)) (4.2.0)
+Requirement already satisfied: scipy>=1.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 10)) (1.8.1)
+Requirement already satisfied: matplotlib>=2.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (3.5.2)
+Requirement already satisfied: packaging in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 21)) (21.3)
+Requirement already satisfied: tomli>=1.0.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 21)) (2.0.1)
+Requirement already satisfied: platformdirs<3,>=2 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from virtualenv->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 25)) (2.5.1)
+Requirement already satisfied: fonttools>=4.22.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (4.33.3)
+Requirement already satisfied: cycler>=0.10 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (0.11.0)
+Requirement already satisfied: kiwisolver>=1.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (1.4.2)
+Requirement already satisfied: python-dateutil>=2.7 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (2.8.2)
+Requirement already satisfied: pyparsing>=2.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (3.0.9)
+Requirement already satisfied: pillow>=6.2.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.g8izlx19.requirements.txt (line 12)) (9.1.1)
+Installing collected packages: ply, nodeenv, iniconfig, flatbuffers, distlib, tqdm, toml, pyyaml, pyomo, pybind11, py, pluggy, opt-einsum, identify, filelock, cvx, cfgv, attrs, absl-py, virtualenv, pytest, jaxlib, jax, pre-commit, jaxopt
+Successfully installed absl-py-1.0.0 attrs-21.4.0 cfgv-3.3.1 cvx-0.1.3 distlib-0.3.4 filelock-3.7.0 flatbuffers-2.0 identify-2.5.1 iniconfig-1.1.1 jax-0.3.13 jaxlib-0.3.10 jaxopt-0.3.1 nodeenv-1.6.0 opt-einsum-3.3.0 pluggy-1.0.0 ply-3.11 pre-commit-2.19.0 py-1.11.0 pybind11-2.9.2 pyomo-6.4.1 pytest-7.1.2 pyyaml-6.0 toml-0.10.2 tqdm-4.64.0 virtualenv-20.14.1
+
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate nonconvex_ro_env
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:55: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_res.to_latex(index=False))
+\begin{tabular}{lllr}
+\toprule
+         case & variables & constraints &  parameters \\
+\midrule
+    reactor\_5 &         5 &           1 &         9.0 \\
+    reactor\_3 &         3 &           1 &         7.0 \\
+    reactor\_2 &         2 &           1 &         6.0 \\
+     supply\_5 &        13 &          13 &        27.0 \\
+    supply\_10 &        37 &          22 &        64.0 \\
+    supply\_20 &       111 &          38 &       162.0 \\
+    supply\_50 &       551 &          86 &       675.0 \\
+heat\_exchange &         7 &           3 &        13.0 \\
+          toy &         2 &           1 &         1.0 \\
+\bottomrule
+\end{tabular}
+
+SOLVING  reactor_5  USING  Blankenship-Faulk All
+SOLVING  reactor_3  USING  Blankenship-Faulk All
+SOLVING  reactor_2  USING  Blankenship-Faulk All
+SOLVING  supply_5  USING  Blankenship-Faulk All
+SOLVING  supply_10  USING  Blankenship-Faulk All
+SOLVING  supply_20  USING  Blankenship-Faulk All
+SOLVING  supply_50  USING  Blankenship-Faulk All
+SOLVING  heat_exchange  USING  Blankenship-Faulk All
+SOLVING  toy  USING  Blankenship-Faulk All
+SOLVING  reactor_5  USING  Blankenship-Faulk Single
+SOLVING  reactor_3  USING  Blankenship-Faulk Single
+SOLVING  reactor_2  USING  Blankenship-Faulk Single
+SOLVING  supply_5  USING  Blankenship-Faulk Single
+SOLVING  supply_10  USING  Blankenship-Faulk Single
+SOLVING  supply_20  USING  Blankenship-Faulk Single
+
+CondaValueError: prefix already exists: /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env
+
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:55: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_res.to_latex(index=False))
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 323, in _execute_command
+    results = subprocess.run(
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 501, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 966, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 1842, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/ipopt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 154, in <module>
+    res = run(key, value, m)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 137, in run
+    res = m(cases[k], "ipopt", e, cut)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_bf.py", line 68, in run_bf_case
+    SolverFactory(solver).solve(m_lower)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 579, in solve
+    _status = self._apply_solver()
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 255, in _apply_solver
+    self._rc, self._log = self._execute_command(self._command)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 340, in _execute_command
+    raise ApplicationError(msg % (command.cmd, err))
+pyomo.common.errors.ApplicationError: Could not execute the command: ['/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/ipopt', '/var/tmp/pbs.5587332.pbs/tmpqw9i5kl7.pyomo.nl', '-AMPL']	Error message: [Errno 2] No such file or directory: '/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/ipopt'
+/var/spool/PBS/mom_priv/jobs/5587332.pbs.SC: line 15: /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/python3: No such file or directory
+\begin{tabular}{lllr}
+\toprule
+         case & variables & constraints &  parameters \\
+\midrule
+    reactor\_5 &         5 &           1 &         9.0 \\
+    reactor\_3 &         3 &           1 &         7.0 \\
+    reactor\_2 &         2 &           1 &         6.0 \\
+     supply\_5 &        13 &          13 &        27.0 \\
+    supply\_10 &        37 &          22 &        64.0 \\
+    supply\_20 &       111 &          38 &       162.0 \\
+    supply\_50 &       551 &          86 &       675.0 \\
+heat\_exchange &         7 &           3 &        13.0 \\
+          toy &         2 &           1 &         1.0 \\
+\bottomrule
+\end{tabular}
+
+SOLVING  reactor_5  USING  MINLP IE 1
+Starting to solve...
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 323, in _execute_command
+    results = subprocess.run(
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 501, in run
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 966, in __init__
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/subprocess.py", line 1842, in _execute_child
+FileNotFoundError: [Errno 2] No such file or directory: '/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/bonmin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 154, in <module>
+    res = run(key, value, m)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 124, in run
+    res = m(cases[k], "bonmin", e, n)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_it.py", line 54, in run_it_case
+    SolverFactory(solver).solve(m_upper)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 579, in solve
+    _status = self._apply_solver()
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 255, in _apply_solver
+    self._rc, self._log = self._execute_command(self._command)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 340, in _execute_command
+    raise ApplicationError(msg % (command.cmd, err))
+pyomo.common.errors.ApplicationError: Could not execute the command: ['/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/bonmin', '/var/tmp/pbs.5587475.pbs/tmpuhivdiag.pyomo.nl', '-AMPL']	Error message: [Errno 2] No such file or directory: '/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/bonmin'
+/var/spool/PBS/mom_priv/jobs/5587475.pbs.SC: line 15: /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/python3: No such file or directory
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+
+Downloading and Extracting Packages
+numpy-1.22.4         | 6.8 MB    |            |   0% numpy-1.22.4         | 6.8 MB    |            |   0% numpy-1.22.4         | 6.8 MB    | #######    |  70% numpy-1.22.4         | 6.8 MB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Installing pip dependencies: ...working... Ran pip subprocess with arguments:
+['/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/python', '-m', 'pip', 'install', '-U', '-r', '/rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt']
+Pip subprocess output:
+Collecting absl-py
+  Using cached absl_py-1.0.0-py3-none-any.whl (126 kB)
+Collecting attrs
+  Using cached attrs-21.4.0-py2.py3-none-any.whl (60 kB)
+Collecting cfgv
+  Using cached cfgv-3.3.1-py2.py3-none-any.whl (7.3 kB)
+Collecting cvx
+  Using cached cvx-0.1.3-py3-none-any.whl
+Collecting distlib
+  Using cached distlib-0.3.4-py2.py3-none-any.whl (461 kB)
+Collecting filelock
+  Using cached filelock-3.7.0-py3-none-any.whl (10 kB)
+Collecting flatbuffers
+  Using cached flatbuffers-2.0-py2.py3-none-any.whl (26 kB)
+Collecting identify
+  Using cached identify-2.5.1-py2.py3-none-any.whl (98 kB)
+Collecting iniconfig
+  Using cached iniconfig-1.1.1-py2.py3-none-any.whl (5.0 kB)
+Collecting jax
+  Using cached jax-0.3.13-py3-none-any.whl
+Collecting jaxlib
+  Using cached jaxlib-0.3.10-cp310-none-manylinux2014_x86_64.whl (69.0 MB)
+Collecting jaxopt
+  Downloading jaxopt-0.4-py3-none-any.whl (119 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.3/119.3 kB 2.0 MB/s eta 0:00:00
+Collecting nodeenv
+  Using cached nodeenv-1.6.0-py2.py3-none-any.whl (21 kB)
+Collecting opt-einsum
+  Using cached opt_einsum-3.3.0-py3-none-any.whl (65 kB)
+Collecting pluggy
+  Using cached pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+Collecting ply
+  Using cached ply-3.11-py2.py3-none-any.whl (49 kB)
+Collecting pre-commit
+  Using cached pre_commit-2.19.0-py2.py3-none-any.whl (199 kB)
+Collecting py
+  Using cached py-1.11.0-py2.py3-none-any.whl (98 kB)
+Collecting pybind11
+  Using cached pybind11-2.9.2-py2.py3-none-any.whl (213 kB)
+Collecting pyomo
+  Using cached Pyomo-6.4.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (10.4 MB)
+Collecting pytest
+  Using cached pytest-7.1.2-py3-none-any.whl (297 kB)
+Collecting pyyaml
+  Using cached PyYAML-6.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (682 kB)
+Collecting toml
+  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting tqdm
+  Using cached tqdm-4.64.0-py2.py3-none-any.whl (78 kB)
+Collecting virtualenv
+  Using cached virtualenv-20.14.1-py2.py3-none-any.whl (8.8 MB)
+Requirement already satisfied: six in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from absl-py->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 1)) (1.16.0)
+Requirement already satisfied: numpy in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from cvx->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 4)) (1.22.4)
+Requirement already satisfied: scipy>=1.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 10)) (1.8.1)
+Requirement already satisfied: typing-extensions in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 10)) (4.2.0)
+Requirement already satisfied: matplotlib>=2.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (3.5.2)
+Requirement already satisfied: packaging in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 21)) (21.3)
+Requirement already satisfied: tomli>=1.0.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 21)) (2.0.1)
+Requirement already satisfied: platformdirs<3,>=2 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from virtualenv->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 25)) (2.5.1)
+Requirement already satisfied: pyparsing>=2.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (3.0.9)
+Requirement already satisfied: cycler>=0.10 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (0.11.0)
+Requirement already satisfied: pillow>=6.2.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (9.1.1)
+Requirement already satisfied: fonttools>=4.22.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (4.33.3)
+Requirement already satisfied: kiwisolver>=1.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (1.4.2)
+Requirement already satisfied: python-dateutil>=2.7 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.8yqim538.requirements.txt (line 12)) (2.8.2)
+Installing collected packages: ply, nodeenv, iniconfig, flatbuffers, distlib, tqdm, toml, pyyaml, pyomo, pybind11, py, pluggy, opt-einsum, identify, filelock, cvx, cfgv, attrs, absl-py, virtualenv, pytest, jaxlib, jax, pre-commit, jaxopt
+Successfully installed absl-py-1.0.0 attrs-21.4.0 cfgv-3.3.1 cvx-0.1.3 distlib-0.3.4 filelock-3.7.0 flatbuffers-2.0 identify-2.5.1 iniconfig-1.1.1 jax-0.3.13 jaxlib-0.3.10 jaxopt-0.4 nodeenv-1.6.0 opt-einsum-3.3.0 pluggy-1.0.0 ply-3.11 pre-commit-2.19.0 py-1.11.0 pybind11-2.9.2 pyomo-6.4.1 pytest-7.1.2 pyyaml-6.0 toml-0.10.2 tqdm-4.64.0 virtualenv-20.14.1
+
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate nonconvex_ro_env
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:55: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_res.to_latex(index=False))
+\begin{tabular}{lllr}
+\toprule
+         case & variables & constraints &  parameters \\
+\midrule
+    reactor\_5 &         5 &           1 &         9.0 \\
+    reactor\_3 &         3 &           1 &         7.0 \\
+    reactor\_2 &         2 &           1 &         6.0 \\
+     supply\_5 &        13 &          13 &        27.0 \\
+    supply\_10 &        37 &          22 &        64.0 \\
+    supply\_20 &       111 &          38 &       162.0 \\
+    supply\_50 &       551 &          86 &       675.0 \\
+heat\_exchange &         7 &           3 &        13.0 \\
+          toy &         2 &           1 &         1.0 \\
+\bottomrule
+\end{tabular}
+
+SOLVING  reactor_5  USING  MINLP IE 1
+Starting to solve...
+ERROR: Unable to clone Pyomo component attribute. Component 'x' contains an
+    uncopyable field '_init_values' (<class
+    'pyomo.core.base.set.TuplizeValuesInitializer'>)
+WARNING: Could not locate the 'glpsol' executable, which is required for
+    solver 'glpk'
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 154, in <module>
+    res = run(key, value, m)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 124, in run
+    res = m(cases[k], "mindtpy", e, n)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_it.py", line 54, in run_it_case
+    SolverFactory(solver).solve(m_upper)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/contrib/mindtpy/MindtPy.py", line 235, in solve
+    MindtPy_iteration_loop(solve_data, config)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/contrib/mindtpy/iterate.py", line 57, in MindtPy_iteration_loop
+    main_mip, main_mip_results = solve_main(solve_data, config)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/contrib/mindtpy/mip_solve.py", line 66, in solve_main
+    main_mip_results = mainopt.solve(solve_data.mip,
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/base/solvers.py", line 513, in solve
+    self.available(exception_flag=True)
+  File "/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages/pyomo/opt/solver/shellcmd.py", line 129, in available
+    raise ApplicationError(msg % self.name)
+pyomo.common.errors.ApplicationError: No executable found for solver 'glpk'
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+\begin{tabular}{llllllllll}
+\toprule
+{} & \multicolumn{3}{l}{wallclock\_time} & \multicolumn{3}{l}{problems\_solved} & \multicolumn{3}{l}{average\_constraints\_in\_any\_problem} \\
+{} &              5 &      3 &      2 &               5 &   3 &   2 &                                  5 &      3 &      2 \\
+\midrule
+Blankenship-Faulk All    &          0.668 &  0.146 &  0.137 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Single &           0.16 &  0.158 &  0.158 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Five   &          0.096 &  0.102 &  0.089 &               2 &   2 &   2 &                                0.5 &    0.5 &    0.5 \\
+Restriction of RHS       &          2.039 &  1.768 &  1.701 &              36 &  36 &  36 &                              1.722 &  1.722 &  1.722 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lllllllllllll}
+\toprule
+{} & \multicolumn{4}{l}{wallclock\_time} & \multicolumn{4}{l}{problems\_solved} & \multicolumn{4}{l}{average\_constraints\_in\_any\_problem} \\
+{} &             5  &     10 &     20 &      50 &              5  &   10 &   20 &   50 &                                 5  &     10 &     20 &     50 \\
+\midrule
+Blankenship-Faulk All    &          2.518 &  3.247 &  3.849 &  37.232 &              70 &   85 &   87 &  670 &                              1.943 &  1.824 &  1.529 &  1.661 \\
+Blankenship-Faulk Single &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+Blankenship-Faulk Five   &          0.617 &  1.043 &  1.659 &   5.309 &              10 &   17 &   29 &   67 &                                1.3 &  1.294 &   1.31 &  1.284 \\
+Restriction of RHS       &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.583 &              12 &                              1.167 \\
+Blankenship-Faulk Single &          1.013 &              16 &                              1.125 \\
+Blankenship-Faulk Five   &          0.295 &               4 &                               0.75 \\
+Restriction of RHS       &          0.646 &              16 &                              1.062 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.803 &              20 &                               2.75 \\
+Blankenship-Faulk Single &           0.86 &              20 &                               2.75 \\
+Blankenship-Faulk Five   &          0.083 &               2 &                                0.5 \\
+Restriction of RHS       &          1.567 &              44 &                                3.0 \\
+\bottomrule
+\end{tabular}
+
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+
+Downloading and Extracting Packages
+glpk-5.0             | 1023 KB   |            |   0% glpk-5.0             | 1023 KB   | 1          |   2% glpk-5.0             | 1023 KB   | ########## | 100% glpk-5.0             | 1023 KB   | ########## | 100% 
+gmp-6.2.1            | 806 KB    |            |   0% gmp-6.2.1            | 806 KB    | ########## | 100% gmp-6.2.1            | 806 KB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Installing pip dependencies: ...working... Ran pip subprocess with arguments:
+['/rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/bin/python', '-m', 'pip', 'install', '-U', '-r', '/rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt']
+Pip subprocess output:
+Collecting absl-py
+  Using cached absl_py-1.0.0-py3-none-any.whl (126 kB)
+Collecting attrs
+  Using cached attrs-21.4.0-py2.py3-none-any.whl (60 kB)
+Collecting cfgv
+  Using cached cfgv-3.3.1-py2.py3-none-any.whl (7.3 kB)
+Collecting cvx
+  Using cached cvx-0.1.3-py3-none-any.whl
+Collecting distlib
+  Using cached distlib-0.3.4-py2.py3-none-any.whl (461 kB)
+Collecting filelock
+  Using cached filelock-3.7.0-py3-none-any.whl (10 kB)
+Collecting flatbuffers
+  Using cached flatbuffers-2.0-py2.py3-none-any.whl (26 kB)
+Collecting identify
+  Using cached identify-2.5.1-py2.py3-none-any.whl (98 kB)
+Collecting iniconfig
+  Using cached iniconfig-1.1.1-py2.py3-none-any.whl (5.0 kB)
+Collecting jax
+  Using cached jax-0.3.13-py3-none-any.whl
+Collecting jaxlib
+  Using cached jaxlib-0.3.10-cp310-none-manylinux2014_x86_64.whl (69.0 MB)
+Collecting jaxopt
+  Using cached jaxopt-0.4-py3-none-any.whl (119 kB)
+Collecting nodeenv
+  Using cached nodeenv-1.6.0-py2.py3-none-any.whl (21 kB)
+Collecting opt-einsum
+  Using cached opt_einsum-3.3.0-py3-none-any.whl (65 kB)
+Collecting pluggy
+  Using cached pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+Collecting ply
+  Using cached ply-3.11-py2.py3-none-any.whl (49 kB)
+Collecting pre-commit
+  Using cached pre_commit-2.19.0-py2.py3-none-any.whl (199 kB)
+Collecting py
+  Using cached py-1.11.0-py2.py3-none-any.whl (98 kB)
+Collecting pybind11
+  Using cached pybind11-2.9.2-py2.py3-none-any.whl (213 kB)
+Collecting pyomo
+  Using cached Pyomo-6.4.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (10.4 MB)
+Collecting pytest
+  Using cached pytest-7.1.2-py3-none-any.whl (297 kB)
+Collecting pyyaml
+  Using cached PyYAML-6.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (682 kB)
+Collecting toml
+  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting tqdm
+  Using cached tqdm-4.64.0-py2.py3-none-any.whl (78 kB)
+Collecting virtualenv
+  Using cached virtualenv-20.14.1-py2.py3-none-any.whl (8.8 MB)
+Requirement already satisfied: six in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from absl-py->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 1)) (1.16.0)
+Requirement already satisfied: numpy in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from cvx->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 4)) (1.22.4)
+Requirement already satisfied: typing-extensions in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 10)) (4.2.0)
+Requirement already satisfied: scipy>=1.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jax->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 10)) (1.8.1)
+Requirement already satisfied: matplotlib>=2.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (3.5.2)
+Requirement already satisfied: tomli>=1.0.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 21)) (2.0.1)
+Requirement already satisfied: packaging in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from pytest->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 21)) (21.3)
+Requirement already satisfied: platformdirs<3,>=2 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from virtualenv->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 25)) (2.5.1)
+Requirement already satisfied: pyparsing>=2.2.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (3.0.9)
+Requirement already satisfied: fonttools>=4.22.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (4.33.3)
+Requirement already satisfied: cycler>=0.10 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (0.11.0)
+Requirement already satisfied: pillow>=6.2.0 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (9.1.1)
+Requirement already satisfied: python-dateutil>=2.7 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (2.8.2)
+Requirement already satisfied: kiwisolver>=1.0.1 in /rds/general/user/trs20/home/anaconda3/envs/nonconvex_ro_env/lib/python3.10/site-packages (from matplotlib>=2.0.1->jaxopt->-r /rds/general/user/trs20/home/nonconvex_ro/condaenv.eugs2h9j.requirements.txt (line 12)) (1.4.2)
+Installing collected packages: ply, nodeenv, iniconfig, flatbuffers, distlib, tqdm, toml, pyyaml, pyomo, pybind11, py, pluggy, opt-einsum, identify, filelock, cvx, cfgv, attrs, absl-py, virtualenv, pytest, jaxlib, jax, pre-commit, jaxopt
+Successfully installed absl-py-1.0.0 attrs-21.4.0 cfgv-3.3.1 cvx-0.1.3 distlib-0.3.4 filelock-3.7.0 flatbuffers-2.0 identify-2.5.1 iniconfig-1.1.1 jax-0.3.13 jaxlib-0.3.10 jaxopt-0.4 nodeenv-1.6.0 opt-einsum-3.3.0 pluggy-1.0.0 ply-3.11 pre-commit-2.19.0 py-1.11.0 pybind11-2.9.2 pyomo-6.4.1 pytest-7.1.2 pyyaml-6.0 toml-0.10.2 tqdm-4.64.0 virtualenv-20.14.1
+
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate nonconvex_ro_env
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:51: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_res = problem_res.append(
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py:55: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_res.to_latex(index=False))
+\begin{tabular}{lllr}
+\toprule
+         case & variables & constraints &  parameters \\
+\midrule
+    reactor\_5 &         5 &           1 &         9.0 \\
+    reactor\_3 &         3 &           1 &         7.0 \\
+    reactor\_2 &         2 &           1 &         6.0 \\
+     supply\_5 &        13 &          13 &        27.0 \\
+    supply\_10 &        37 &          22 &        64.0 \\
+    supply\_20 &       111 &          38 &       162.0 \\
+    supply\_50 &       551 &          86 &       675.0 \\
+heat\_exchange &         7 &           3 &        13.0 \\
+          toy &         2 &           1 &         1.0 \\
+\bottomrule
+\end{tabular}
+
+SOLVING  reactor_5  USING  MINLP IE 1
+Starting to solve...
+ERROR: Unable to clone Pyomo component attribute. Component 'x' contains an
+    uncopyable field '_init_values' (<class
+    'pyomo.core.base.set.TuplizeValuesInitializer'>)
+SOLVING  reactor_3  USING  MINLP IE 1
+Starting to solve...
+ERROR: Unable to clone Pyomo component attribute. Component 'x' contains an
+    uncopyable field '_init_values' (<class
+    'pyomo.core.base.set.TuplizeValuesInitializer'>)
+SOLVING  reactor_2  USING  MINLP IE 1
+Starting to solve...
+ERROR: Unable to clone Pyomo component attribute. Component 'x' contains an
+    uncopyable field '_init_values' (<class
+    'pyomo.core.base.set.TuplizeValuesInitializer'>)
+SOLVING  supply_5  USING  MINLP IE 1
+Traceback (most recent call last):
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 154, in <module>
+    res = run(key, value, m)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/case_studies.py", line 124, in run
+    res = m(cases[k], "mindtpy", e, n)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_it.py", line 44, in run_it_case
+    m_upper.cons.add(expr=con_u(x_vars, p_list[i], con) <= 0)
+  File "/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/run_it.py", line 39, in con_u
+    return con(x, p).u
+AttributeError: 'SumExpression' object has no attribute 'u'
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:28: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  problem_dict = problem_dict.append(method_dict, ignore_index=True)
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:69: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+/rds/general/user/trs20/home/nonconvex_ro/nonconvex_ro/results_analysis.py:73: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(problem_dfs[i].to_latex(index=True))
+\begin{tabular}{llllllllll}
+\toprule
+{} & \multicolumn{3}{l}{wallclock\_time} & \multicolumn{3}{l}{problems\_solved} & \multicolumn{3}{l}{average\_constraints\_in\_any\_problem} \\
+{} &              5 &      3 &      2 &               5 &   3 &   2 &                                  5 &      3 &      2 \\
+\midrule
+Blankenship-Faulk All    &          0.668 &  0.146 &  0.137 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Single &           0.16 &  0.158 &  0.158 &               4 &   4 &   4 &                               0.75 &   0.75 &   0.75 \\
+Blankenship-Faulk Five   &          0.096 &  0.102 &  0.089 &               2 &   2 &   2 &                                0.5 &    0.5 &    0.5 \\
+Restriction of RHS       &          2.039 &  1.768 &  1.701 &              36 &  36 &  36 &                              1.722 &  1.722 &  1.722 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lllllllllllll}
+\toprule
+{} & \multicolumn{4}{l}{wallclock\_time} & \multicolumn{4}{l}{problems\_solved} & \multicolumn{4}{l}{average\_constraints\_in\_any\_problem} \\
+{} &             5  &     10 &     20 &      50 &              5  &   10 &   20 &   50 &                                 5  &     10 &     20 &     50 \\
+\midrule
+Blankenship-Faulk All    &          2.518 &  3.247 &  3.849 &  37.232 &              70 &   85 &   87 &  670 &                              1.943 &  1.824 &  1.529 &  1.661 \\
+Blankenship-Faulk Single &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+Blankenship-Faulk Five   &          0.617 &  1.043 &  1.659 &   5.309 &              10 &   17 &   29 &   67 &                                1.3 &  1.294 &   1.31 &  1.284 \\
+Restriction of RHS       &            N/A &    N/A &    N/A &     N/A &             N/A &  N/A &  N/A &  N/A &                                N/A &    N/A &    N/A &    N/A \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.583 &              12 &                              1.167 \\
+Blankenship-Faulk Single &          1.013 &              16 &                              1.125 \\
+Blankenship-Faulk Five   &          0.295 &               4 &                               0.75 \\
+Restriction of RHS       &          0.646 &              16 &                              1.062 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llll}
+\toprule
+{} & wallclock\_time & problems\_solved & average\_constraints\_in\_any\_problem \\
+\midrule
+Blankenship-Faulk All    &          0.803 &              20 &                               2.75 \\
+Blankenship-Faulk Single &           0.86 &              20 &                               2.75 \\
+Blankenship-Faulk Five   &          0.083 &               2 &                                0.5 \\
+Restriction of RHS       &          1.567 &              44 &                                3.0 \\
+\bottomrule
+\end{tabular}
+
