@@ -34,6 +34,7 @@ def run_it_case(problem, solver, e, n_int):
     m_upper.cons = ConstraintList()
 
     p_list = subdivide_vector(p_full, n_int)
+    global con_u
 
     def con_u(x, p, con):
         return con(x, p).u
@@ -41,16 +42,16 @@ def run_it_case(problem, solver, e, n_int):
     # print("Interval Extensions: ", len(p_list))
     for i in range(len(p_list)):
         for con in con_list:
-            m_upper.cons.add(expr=con_u(x_vars, p_list[i], con) <= 0)
+            try:
+                e = con_u(x_vars, p_list[i], con)
+                m_upper.cons.add(expr=con_u(x_vars, p_list[i], con) <= 0)
+            except AttributeError:
+                m_upper.cons.add(expr=con(x_vars, p_list[i]) <= 0)
+
     m_upper.obj = Objective(expr=obj(x_vars), sense=minimize)
     print("Starting to solve...")
 
-    bin_vars = int(((len(m_upper._decl) - 5) / 2) * 4)
     res = {}
-    res["vars"] = len(x_vars)
-    res["cons"] = len(m_upper.cons)
-    res["bin_vars"] = bin_vars
-
     SolverFactory(solver).solve(m_upper)
     res["solution"] = value(m_upper.x_v[:])
     res["objective"] = value(m_upper.obj)

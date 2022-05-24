@@ -14,6 +14,9 @@ from run_it_slsqp import run_it_slsqp_case, it_slsqp_data
 import json
 
 cases = {}
+x, p, con_list, obj = create_toy_problem()
+problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
+cases["toy"] = problem
 x, p, con_list, obj = create_reactor_problem(5)
 problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["reactor_5"] = problem
@@ -38,9 +41,6 @@ cases["supply_50"] = problem
 x, p, con_list, obj = create_heat_exchange_problem()
 problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["heat_exchange"] = problem
-x, p, con_list, obj = create_toy_problem()
-problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
-cases["toy"] = problem
 
 problem_res = pd.DataFrame(columns=["case", "variables", "constraints"])
 for n, p in cases.items():
@@ -54,7 +54,7 @@ for n, p in cases.items():
     )
 print(problem_res.to_latex(index=False))
 
-# res = run_it_case(cases['reactor_3'],'bonmin',1e-4,2)
+# res = run_it_case(cases['supply_5'],'mindtpy',1e-4,2)
 # print(res)
 
 methods = {
