@@ -58,10 +58,6 @@ print(problem_res.to_latex(index=False))
 # print(res)
 
 methods = {
-    "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All", "data": bf_data},
-    "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single", "data": bf_data},
-    "Blankenship-Faulk Five": {"fun": run_bf_case, "cut": "Five", "data": bf_data},
-    "Restriction of RHS": {"fun": run_ms_case, "data": ms_data},
     "MINLP IE 1": {"fun": run_it_case, "n": 1, "data": it_data},
     "Nonsmooth IE 1, RS": {
         "fun": run_it_rs_case,
@@ -101,6 +97,10 @@ methods = {
         "n": 10,
         "p": 10000,
     },
+    "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All", "data": bf_data},
+    "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single", "data": bf_data},
+    "Blankenship-Faulk Five": {"fun": run_bf_case, "cut": "Five", "data": bf_data},
+    "Restriction of RHS": {"fun": run_ms_case, "data": ms_data},
 }
 
 
@@ -154,22 +154,31 @@ for key, value in methods.items():
             res = run(key, value, m)
             print(res)
             res_cases[k] = res
+            signal.alarm(0)
             continue
         except TimeoutException:
-            print('RUNNING ALTERNATIVE FUNCTION')
-            res = run(key, value, d)
-            res_cases[k] = res
+            signal.alarm(int(timeout))
+            try:
+                print("RUNNING ALTERNATIVE FUNCTION")
+                res = run(key, value, d)
+                res_cases[k] = res
+                print(res)
+            except TimeoutException:
+                res_cases[k] = {
+                    "wallclock_time": "N/A",
+                    "problems_solved": "N/A",
+                    "average_constraints_in_any_problem": "N/A",
+                }
             continue  # continue the for loop if function takes more than 5 second
 
-
         except ValueError:
-            print('ERROR')
+            print("ERROR")
             res = {"ERROR": "FAIL"}
             res_cases[k] = res
             continue
 
         else:
-            print('RAN OUT OF TIME')
+            print("RAN OUT OF TIME")
             signal.alarm(0)
     res_overall[key] = res_cases
 
