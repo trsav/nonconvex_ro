@@ -121,7 +121,7 @@ def create_supply_chain_problem(I, J, K):
             c = 0
             for j in range(J):
                 c += grow_S[i, j]
-            return c - grow_max[i]
+            return -(grow_max[i]+(-c))
 
         return c
 
@@ -140,7 +140,7 @@ def create_supply_chain_problem(I, J, K):
             c = 0
             for k in range(K):
                 c += proc_S[j, k]
-            return c - proc_max[j]
+            return -(proc_max[j]+(-c))
 
         return c
 
@@ -159,7 +159,7 @@ def create_supply_chain_problem(I, J, K):
             c = 0
             for j in range(J):
                 c += proc_S[j, k]
-            return -c + dem_min[k]
+            return dem_min[k] + (-c)
 
         return c
 

@@ -14,6 +14,9 @@ from run_it_slsqp import run_it_slsqp_case, it_slsqp_data
 import json
 
 cases = {}
+x, p, con_list, obj = create_heat_exchange_problem()
+problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
+cases["heat_exchange"] = problem
 x, p, con_list, obj = create_toy_problem()
 problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["toy"] = problem
@@ -38,9 +41,6 @@ cases["supply_20"] = problem
 x, p, con_list, obj = create_supply_chain_problem(50, 10, 5)
 problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
 cases["supply_50"] = problem
-x, p, con_list, obj = create_heat_exchange_problem()
-problem = {"x": x, "p": p, "cons": con_list, "obj": obj}
-cases["heat_exchange"] = problem
 
 problem_res = pd.DataFrame(columns=["case", "variables", "constraints"])
 for n, p in cases.items():
@@ -58,11 +58,11 @@ print(problem_res.to_latex(index=False))
 # print(res)
 
 methods = {
-    "MINLP IE 1": {"fun": run_it_case, "n": 1, "data": it_data},
     "Blankenship-Faulk All": {"fun": run_bf_case, "cut": "All", "data": bf_data},
     "Blankenship-Faulk Single": {"fun": run_bf_case, "cut": "Single", "data": bf_data},
     "Blankenship-Faulk Five": {"fun": run_bf_case, "cut": "Five", "data": bf_data},
     "Restriction of RHS": {"fun": run_ms_case, "data": ms_data},
+    "MINLP IE 1": {"fun": run_it_case, "n": 1, "data": it_data},
     "Nonsmooth IE 1, RS": {
         "fun": run_it_rs_case,
         "data": it_rs_data,
@@ -140,7 +140,7 @@ def run(key, value, m):
     return res
 
 
-timeout = 900
+timeout = 60
 res_overall = {}
 for key, value in methods.items():
     m = value["fun"]
@@ -152,17 +152,24 @@ for key, value in methods.items():
 
         try:
             res = run(key, value, m)
+            print(res)
             res_cases[k] = res
+            continue
         except TimeoutException:
+            print('RUNNING ALTERNATIVE FUNCTION')
             res = run(key, value, d)
             res_cases[k] = res
             continue  # continue the for loop if function takes more than 5 second
+
+
         except ValueError:
+            print('ERROR')
             res = {"ERROR": "FAIL"}
             res_cases[k] = res
             continue
 
         else:
+            print('RAN OUT OF TIME')
             signal.alarm(0)
     res_overall[key] = res_cases
 
