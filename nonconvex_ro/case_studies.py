@@ -107,10 +107,8 @@ methods = {
 class TimeoutException(Exception):  # Custom exception class
     pass
 
-
 def timeout_handler(signum, frame):  # Custom signal handler
     raise TimeoutException
-
 
 # Change the behavior of SIGALRM
 signal.signal(signal.SIGALRM, timeout_handler)
@@ -123,7 +121,7 @@ def run(key, value, m):
         n = value["n"]
         res = m(cases[k], "mindtpy", e, n)
     elif key.split(" ")[0] == "Nonsmooth":
-        if key.split(" ")[-1] == "search":
+        if key.split(" ")[-1] == "RS":
             n = value["n"]
             p = value["p"]
             res = m(cases[k], n, p)
@@ -140,46 +138,51 @@ def run(key, value, m):
     return res
 
 
-timeout = 60
+timeout = 270
 res_overall = {}
 for key, value in methods.items():
     m = value["fun"]
     d = value["data"]
     res_cases = {}
     for k in list(cases.keys()):
-        print("SOLVING ", k, " USING ", key)
-        signal.alarm(int(timeout))
-
+        print("\nSOLVING ", k, " USING ", key,"\n")
+        
         try:
+            signal.alarm(int(timeout))
             res = run(key, value, m)
-            print(res)
             res_cases[k] = res
-            signal.alarm(0)
+            print('SOLVED NORMALLY :) \n')
             continue
         except TimeoutException:
-            signal.alarm(int(timeout))
             try:
-                print("RUNNING ALTERNATIVE FUNCTION")
+                signal.alarm(int(timeout))
+                print("RUNNING ALTERNATIVE FUNCTION \n")
                 res = run(key, value, d)
                 res_cases[k] = res
-                print(res)
+                res['wallclock_time'] = res['wallclock_time'] + ' (SolveTimeoutException)'
+                res['problems_solved'] = res['problems_solved'] + ' (SolveTimeoutException)'
+                res['average_constraints_in_any_problem'] = res['average_constraints_in_any_problem'] + ' (SolveTimeoutException)'
+                print('DONE\n')
+                continue
             except TimeoutException:
+                print('TAKING TOO LONG... GIVE UP \n')
                 res_cases[k] = {
-                    "wallclock_time": "N/A",
-                    "problems_solved": "N/A",
-                    "average_constraints_in_any_problem": "N/A",
+                    "wallclock_time": "N/A (ProblemTimeoutException)",
+                    "problems_solved": "N/A (ProblemTimeoutException)",
+                    "average_constraints_in_any_problem": "N/A (ProblemTimeoutException)",
                 }
-            continue  # continue the for loop if function takes more than 5 second
+                continue
 
         except ValueError:
-            print("ERROR")
-            res = {"ERROR": "FAIL"}
-            res_cases[k] = res
+            print("ERROR \n")
+            res_cases[k] = {
+                "wallclock_time": "N/A (ValueError)",
+                "problems_solved": "N/A (ValueError)",
+                "average_constraints_in_any_problem": "N/A (ValueError)",
+            }
             continue
 
-        else:
-            print("RAN OUT OF TIME")
-            signal.alarm(0)
+
     res_overall[key] = res_cases
 
 pprint.pprint(res_overall)
