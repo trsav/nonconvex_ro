@@ -107,8 +107,10 @@ methods = {
 class TimeoutException(Exception):  # Custom exception class
     pass
 
+
 def timeout_handler(signum, frame):  # Custom signal handler
     raise TimeoutException
+
 
 # Change the behavior of SIGALRM
 signal.signal(signal.SIGALRM, timeout_handler)
@@ -138,20 +140,20 @@ def run(key, value, m):
     return res
 
 
-timeout = 270
+timeout = 180
 res_overall = {}
 for key, value in methods.items():
     m = value["fun"]
     d = value["data"]
     res_cases = {}
     for k in list(cases.keys()):
-        print("\nSOLVING ", k, " USING ", key,"\n")
-        
+        print("\nSOLVING ", k, " USING ", key, "\n")
+
         try:
             signal.alarm(int(timeout))
             res = run(key, value, m)
             res_cases[k] = res
-            print('SOLVED NORMALLY :) \n')
+            print("SOLVED NORMALLY :) \n")
             continue
         except TimeoutException:
             try:
@@ -159,13 +161,20 @@ for key, value in methods.items():
                 print("RUNNING ALTERNATIVE FUNCTION \n")
                 res = run(key, value, d)
                 res_cases[k] = res
-                res['wallclock_time'] = res['wallclock_time'] + ' (SolveTimeoutException)'
-                res['problems_solved'] = res['problems_solved'] + ' (SolveTimeoutException)'
-                res['average_constraints_in_any_problem'] = res['average_constraints_in_any_problem'] + ' (SolveTimeoutException)'
-                print('DONE\n')
+                res["wallclock_time"] = (
+                    str(res["wallclock_time"]) + " (SolveTimeoutException)"
+                )
+                res["problems_solved"] = (
+                    str(res["problems_solved"]) + " (SolveTimeoutException)"
+                )
+                res["average_constraints_in_any_problem"] = (
+                    str(res["average_constraints_in_any_problem"])
+                    + " (SolveTimeoutException)"
+                )
+                print("DONE\n")
                 continue
             except TimeoutException:
-                print('TAKING TOO LONG... GIVE UP \n')
+                print("TAKING TOO LONG... GIVE UP \n")
                 res_cases[k] = {
                     "wallclock_time": "N/A (ProblemTimeoutException)",
                     "problems_solved": "N/A (ProblemTimeoutException)",
@@ -181,7 +190,6 @@ for key, value in methods.items():
                 "average_constraints_in_any_problem": "N/A (ValueError)",
             }
             continue
-
 
     res_overall[key] = res_cases
 
